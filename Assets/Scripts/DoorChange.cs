@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,15 +14,31 @@ public class DoorChange : MonoBehaviour
     private Vector2 OGposition;
     private bool inPosition;
     private GameObject Pivotpoint;
+    private List<GameObject> Ghosts = new List<GameObject>();
+    private int GhostNr;
+    private bool GhostReverse;
 
     // Start is called before the first frame update
     void Start()
     {
-        ghost = GameObject.Find("Ghost1" + gameObject.name);
         OGrotation = gameObject.transform.rotation;
         OGposition = gameObject.transform.position;
         inPosition = false;
         Pivotpoint = GameObject.Find(gameObject.name + "Pivotpoint");
+        GhostNr = 1;
+        GhostReverse = false;
+
+        for (int i = 1; i < 4; i++)
+        {
+            if (GameObject.Find("Ghost" + i + gameObject.name) != null)
+            {
+                Ghosts.Add(GameObject.Find("Ghost" + i + gameObject.name));
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -29,8 +46,23 @@ public class DoorChange : MonoBehaviour
     {
         if (clicked == true)
         {
+            ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
             DoorRotate();
+            Debug.Log(GhostNr);
         }
+        
+        if (GhostNr > Ghosts.Count)
+        {
+            GhostNr = Ghosts.Count;
+            GhostReverse = true;
+        }
+
+        if (GhostNr < 1)
+        {
+            GhostNr = 1;
+            GhostReverse = false;
+        }
+
 
         if (inPosition == true)
         {
@@ -66,6 +98,15 @@ public class DoorChange : MonoBehaviour
             OGrotation = gameObject.transform.rotation;
             OGposition = gameObject.transform.position;
             clicked = false;
+            if (GhostReverse == false)
+            {
+                GhostNr = GhostNr + 1;
+            }
+
+            if (GhostReverse == true)
+            {
+                GhostNr = GhostNr - 1;
+            }
         }
         
     }
