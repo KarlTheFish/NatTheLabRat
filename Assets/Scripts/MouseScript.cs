@@ -18,7 +18,7 @@ public class MouseScript : MonoBehaviour
     GameObject LeftGate;
     public int RotateReps;
     static int level = 1;
-    private GameObject[] Doors;
+    public GameObject[] Doors;
     public bool ButtonPressed;
     
     // Start is called before the first frame update
@@ -116,7 +116,10 @@ public class MouseScript : MonoBehaviour
             }
             if (boxCollider2D.GameObject().CompareTag("Door"))
             {
-                boxCollider2D.GameObject().GetComponent<BoxCollider2D>().isTrigger = false;
+                if (boxCollider2D.GameObject().GetComponent<DoorChange>().DisableBounce == true)
+                {
+                    boxCollider2D.GameObject().GetComponent<BoxCollider2D>().isTrigger = false;
+                }
             }
         }
     }
