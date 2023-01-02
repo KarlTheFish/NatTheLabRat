@@ -18,8 +18,6 @@ public class DoorChange : MonoBehaviour
     private int GhostNr;
     private bool GhostReverse;
 
-    public bool DisableBounce;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,66 +44,31 @@ public class DoorChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var door in GameObject.Find("Mouse").GetComponent<MouseScript>().Doors)
+        if (clicked == true)
         {
-            if (GameObject.Find("Ghost" + (GhostNr + 1) + gameObject.name) != null)
-            {
-                if (GhostReverse == false)
-                {
-                    while (door.transform.position == GameObject.Find("Ghost" + (GhostNr + 1) + gameObject.name)
-                               .transform.position)
-                    {
-                        Debug.Log("Something in the way!");
-                        (GameObject.Find("Ghost" + (GhostNr + 1) + gameObject.name)).SetActive(false);
-                        //GhostReverse = true;
-                        break;
-                    }
-                }
-
-                if (GameObject.Find("Ghost" + (GhostNr - 1) + gameObject.name) != null)
-                {
-                    if (GhostReverse == true)
-                    {
-                        while (door.transform.position == GameObject.Find("Ghost" + (GhostNr - 1) + gameObject.name)
-                                   .transform.position)
-                        {
-                            Debug.Log("Something in the way!");
-                            (GameObject.Find("Ghost" + (GhostNr - 1) + gameObject.name)).SetActive(false);
-                            //GhostReverse = false;
-                            break;
-                        }
-
-                    }
-                }
-
-                if (clicked == true)
-                {
-                    ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
-
-
-                    DoorRotate();
-
-                    if (GhostNr > Ghosts.Count)
-                    {
-                        GhostNr = Ghosts.Count;
-                        GhostReverse = true;
-                    }
-
-                    if (GhostNr < 1)
-                    {
-                        GhostNr = 1;
-                        GhostReverse = false;
-                    }
-
-
-                    if (inPosition == true)
-                    {
-                        GhostDoorRotate();
-                    }
-
-                }
-            }
+            ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
+            DoorRotate();
+            Debug.Log(GhostNr);
         }
+        
+        if (GhostNr > Ghosts.Count)
+        {
+            GhostNr = Ghosts.Count;
+            GhostReverse = true;
+        }
+
+        if (GhostNr < 1)
+        {
+            GhostNr = 1;
+            GhostReverse = false;
+        }
+
+
+        if (inPosition == true)
+        {
+            GhostDoorRotate();
+        }
+
     }
 
     private void OnMouseDown()
@@ -145,7 +108,7 @@ public class DoorChange : MonoBehaviour
                 GhostNr = GhostNr - 1;
             }
         }
-
+        
     }
 
     private void GhostDoorRotate()
