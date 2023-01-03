@@ -18,7 +18,7 @@ public class MouseScript : MonoBehaviour
     GameObject LeftGate;
     public int RotateReps;
     static int level = 1;
-    private GameObject[] Doors;
+    public GameObject[] Doors;
     public bool ButtonPressed;
     
     // Start is called before the first frame update

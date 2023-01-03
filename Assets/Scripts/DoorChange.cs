@@ -8,15 +8,16 @@ using UnityEngine.UIElements;
 
 public class DoorChange : MonoBehaviour
 {
-    private GameObject ghost;
+    public GameObject ghost;
     private bool clicked;
     private Quaternion OGrotation;
     private Vector2 OGposition;
     private bool inPosition;
     private GameObject Pivotpoint;
     private List<GameObject> Ghosts = new List<GameObject>();
-    private int GhostNr;
+    public int GhostNr;
     private bool GhostReverse;
+    private List<GameObject> Doors = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,11 @@ public class DoorChange : MonoBehaviour
         Pivotpoint = GameObject.Find(gameObject.name + "Pivotpoint");
         GhostNr = 1;
         GhostReverse = false;
+        foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
+        {
+            Doors.Add(door);
+        }
+        Debug.Log(Doors.Count);
 
         for (int i = 1; i < 4; i++)
         {
@@ -39,16 +45,35 @@ public class DoorChange : MonoBehaviour
                 break;
             }
         }
+
+        //Doors.Remove(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
+        ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
         if (clicked == true)
         {
-            ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
-            DoorRotate();
             Debug.Log(GhostNr);
+            foreach (GameObject door in Doors)
+            {
+                Debug.Log(door.name + " " + Vector2.Distance(door.transform.position, ghost.transform.position));
+                if (Vector2.Distance(door.transform.position, ghost.transform.position) < 0.01)
+                {
+                    if (GhostReverse)
+                    {
+                        GhostNr = GhostNr + 1;
+                    }
+
+                    if (GhostReverse == false)
+                    {
+                        GhostNr = GhostNr - 1;
+                    }
+                    Debug.Log("Something in the way!");
+                }
+            }
+            DoorRotate();
         }
         
         if (GhostNr > Ghosts.Count)
