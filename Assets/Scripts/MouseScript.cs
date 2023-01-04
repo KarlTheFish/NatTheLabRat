@@ -95,28 +95,34 @@ public class MouseScript : MonoBehaviour
         
         else
         {
+            //transform.position = new Vector2(transform.position.x - (float)0.01, transform.position.y - (float)0.01);
             switch ((MoveX, MoveY))
             {
                 case (0, -4):
                     MoveX = 4;
                     MoveY = 0;
+                    transform.position =  new Vector2(transform.position.x,
+                        transform.position.y + (float)0.1);
+                    Debug.Log("Test");
                     break;
                 case (4, 0):
                     MoveX = 0;
                     MoveY = 4;
+                    transform.position = new Vector2(transform.position.x - (float)0.1,
+                        transform.position.y);
                     break;
                 case (0, 4):
                     MoveX = -4;
                     MoveY = 0;
+                    transform.position =  new Vector2(transform.position.x,
+                        transform.position.y - (float)0.1);
                     break;
                 case (-4, 0):
                     MoveX = 0;
                     MoveY = -4;
+                    transform.position = new Vector2(transform.position.x + (float)0.1,
+                        transform.position.y);
                     break;
-            }
-            if (boxCollider2D.GameObject().CompareTag("Door"))
-            {
-                boxCollider2D.GameObject().GetComponent<BoxCollider2D>().isTrigger = false;
             }
         }
     }

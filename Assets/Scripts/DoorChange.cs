@@ -58,8 +58,7 @@ public class DoorChange : MonoBehaviour
             Debug.Log(GhostNr);
             foreach (GameObject door in Doors)
             {
-                Debug.Log(door.name + " " + Vector2.Distance(door.transform.position, ghost.transform.position));
-                if (Vector2.Distance(door.transform.position, ghost.transform.position) < 0.01)
+                if (Vector2.Distance(door.transform.position, ghost.transform.position) < 0.01 && door.name != gameObject.name)
                 {
                     if (GhostReverse)
                     {
@@ -70,6 +69,7 @@ public class DoorChange : MonoBehaviour
                     {
                         GhostNr = GhostNr - 1;
                     }
+                    Debug.Log(door.name + Vector2.Distance(door.transform.position, ghost.transform.position));
                     Debug.Log("Something in the way!");
                 }
             }
@@ -116,7 +116,7 @@ public class DoorChange : MonoBehaviour
                 break;
             }
         }
-
+        
         if (gameObject.transform.rotation == ghost.transform.rotation)
         {
             GhostDoorRotate();
