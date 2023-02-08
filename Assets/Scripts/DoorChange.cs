@@ -107,7 +107,7 @@ public class DoorChange : MonoBehaviour
         {
             if (gameObject.transform.rotation.eulerAngles.z > ghost.transform.rotation.eulerAngles.z)
             {
-                gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, -1);
+                gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
                 break;
             }
             if (gameObject.transform.rotation.eulerAngles.z < ghost.transform.rotation.eulerAngles.z)

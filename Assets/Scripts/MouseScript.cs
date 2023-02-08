@@ -46,6 +46,11 @@ public class MouseScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        throw new NotImplementedException();
+    }
+
     private void OnTriggerEnter2D(Collider2D boxCollider2D)
     {
         Debug.Log(boxCollider2D.GameObject().name);
@@ -82,8 +87,8 @@ public class MouseScript : MonoBehaviour
         if (boxCollider2D.GameObject().name == "Button")
         {
             ButtonPressed = true;
-            MoveX = (float)1.001 * MoveX;
-            MoveY = (float)1.001 * MoveY;
+            MoveX = MoveX * (float)1.001;
+            MoveY = MoveY * (float)1.001;
         }
         
         if (boxCollider2D.GameObject().name == "Mirror")
