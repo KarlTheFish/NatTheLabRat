@@ -9,8 +9,7 @@ public class MirrorScript : MonoBehaviour
     private float mouseX = 0;
     private float mouseY = 0;
     private Vector2 mouseMovement;
-	bool canMove = true;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,24 +32,6 @@ public class MirrorScript : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (canMove == true)
-        {
-            transform.position = transform.position + (Vector3)mouseMovement;
-        }
-
-        if (canMove == false)
-        {
-            transform.position = transform.position - (Vector3)mouseMovement;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        canMove = false;
-    }
-
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        canMove = true;
+        transform.position = transform.position + (Vector3)mouseMovement;
     }
 }
