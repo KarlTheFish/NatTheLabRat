@@ -12,6 +12,9 @@ public class GateOpen : MonoBehaviour
     private bool GateOpened = false;
     private GameObject LeftGate;
     private GameObject RightGate;
+    private GameObject LeftGateGhost;
+    private GameObject RightGateGhost;
+    private bool Complete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,8 @@ public class GateOpen : MonoBehaviour
         //gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         LeftGate = GameObject.Find("LeftGate");
         RightGate = GameObject.Find("RightGate");
+        LeftGateGhost = GameObject.Find("LeftGateGhost");
+        RightGateGhost = GameObject.Find("RightGateGhost");
         LeftGateOGpos = LeftGate.transform.rotation;
         RightGateOGpos = RightGate.transform.rotation;
         LeftGateOGpos1 = LeftGate.transform.position;
@@ -40,10 +45,6 @@ public class GateOpen : MonoBehaviour
             LeftGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             RightGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             OpenGate();
-            if (GameObject.Find("Mouse").GetComponent<MouseScript>().RotateReps == 18)
-            {
-                GateOpened = false;
-            }
         }
         
         
@@ -57,14 +58,18 @@ public class GateOpen : MonoBehaviour
 
     void OpenGate()
     {
-        while (GameObject.Find("Mouse").GetComponent<MouseScript>().RotateReps < 20)
+        while (Complete == false)
         {
-            //GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = false;
-            LeftGate.transform.Rotate(Vector3.forward, 5);
-            RightGate.transform.Rotate(Vector3.forward, -5);
-            GameObject.Find("Mouse").GetComponent<MouseScript>().RotateReps = GameObject.Find("Mouse").GetComponent<MouseScript>().RotateReps + 1;
-            break;
+            LeftGate.transform.position =
+                Vector3.MoveTowards(LeftGate.transform.position, LeftGateGhost.transform.position, Time.deltaTime / 100);
+            RightGate.transform.position = Vector3.MoveTowards(RightGate.transform.position,
+                RightGateGhost.transform.position, Time.deltaTime);
+            if(RightGate.transform.position == RightGateGhost.transform.position && LeftGate.transform.position == LeftGateGhost.transform.position)
+                {
+                    Complete = true;
+                    GateOpened = true;
+                    GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = true;
+                }
         }
-        GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = true;
     }
 }

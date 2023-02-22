@@ -46,11 +46,6 @@ public class MouseScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        throw new NotImplementedException();
-    }
-
     private void OnTriggerEnter2D(Collider2D boxCollider2D)
     {
         Debug.Log(boxCollider2D.GameObject().name);
