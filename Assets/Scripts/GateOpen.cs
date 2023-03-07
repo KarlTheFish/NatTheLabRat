@@ -56,20 +56,22 @@ public class GateOpen : MonoBehaviour
         GameObject.Find("Mouse").GetComponent<MouseScript>().MoveY = -4;
     }
 
+    IEnumerator MoveGates()
+    {
+        while (LeftGate.transform.position != LeftGateGhost.transform.position || RightGate.transform.position != RightGateGhost.transform.position)
+        {
+            LeftGate.transform.position = Vector3.MoveTowards(LeftGate.transform.position, LeftGateGhost.transform.position, Time.deltaTime * 0.2f);
+            RightGate.transform.position = Vector3.MoveTowards(RightGate.transform.position, RightGateGhost.transform.position, Time.deltaTime * 0.2f);
+            yield return null;
+        }
+
+        Complete = true;
+        GateOpened = false;
+        GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = true;
+    }
+
     void OpenGate()
     {
-        while (Complete == false)
-        {
-            LeftGate.transform.position =
-                Vector3.MoveTowards(LeftGate.transform.position, LeftGateGhost.transform.position, Time.deltaTime / 100);
-            RightGate.transform.position = Vector3.MoveTowards(RightGate.transform.position,
-                RightGateGhost.transform.position, Time.deltaTime);
-            if(RightGate.transform.position == RightGateGhost.transform.position && LeftGate.transform.position == LeftGateGhost.transform.position)
-                {
-                    Complete = true;
-                    GateOpened = true;
-                    GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = true;
-                }
-        }
+        StartCoroutine(MoveGates());
     }
 }
