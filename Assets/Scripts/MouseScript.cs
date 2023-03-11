@@ -65,10 +65,6 @@ public class MouseScript : MonoBehaviour
             MoveY = 0;
             MovePermission = false;
             transform.position = StartPosition;
-            LeftGate.transform.rotation =
-                LeftGate.GetComponent<GateOpen>().LeftGateOGpos;
-            RightGate.transform.rotation =
-                RightGate.GetComponent<GateOpen>().RightGateOGpos;
             LeftGate.transform.position = LeftGate.GetComponent<GateOpen>().LeftGateOGpos1;
             RightGate.transform.position = RightGate.GetComponent<GateOpen>().RightGateOGpos1;
             RotateReps = 0;
@@ -79,13 +75,6 @@ public class MouseScript : MonoBehaviour
 
         }
 
-        if (boxCollider2D.GameObject().name == "Button")
-        {
-            ButtonPressed = true;
-            MoveX = MoveX * (float)1.001;
-            MoveY = MoveY * (float)1.001;
-        }
-        
         if (boxCollider2D.GameObject().name == "Mirror")
         {
             MoveX = -MoveX;
