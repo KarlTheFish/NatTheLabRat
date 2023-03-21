@@ -20,14 +20,17 @@ public class MouseScript : MonoBehaviour
     static int level = 1;
     public GameObject[] Doors;
     public bool ButtonPressed;
-    
+    public SpriteRenderer Sprite1;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<Animator>().enabled = false;
         StartPosition = transform.position;
         RightGate = GameObject.Find("RightGate");
         LeftGate = GameObject.Find("LeftGate");
         Doors = GameObject.FindGameObjectsWithTag("Door");
+        Sprite1 = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class MouseScript : MonoBehaviour
     {
         if (MovePermission == true)
         {
+            gameObject.GetComponent<Animator>().enabled = true;
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             Movement = new Vector2(MoveX, MoveY);
             transform.position = (Vector2)transform.position + Movement * Time.deltaTime;
@@ -67,6 +71,7 @@ public class MouseScript : MonoBehaviour
             transform.position = StartPosition;
             LeftGate.transform.position = LeftGate.GetComponent<GateOpen>().LeftGateOGpos1;
             RightGate.transform.position = RightGate.GetComponent<GateOpen>().RightGateOGpos1;
+            gameObject.GetComponent<Animator>().enabled = false;
             RotateReps = 0;
             foreach (var door in Doors )
             {
@@ -79,6 +84,7 @@ public class MouseScript : MonoBehaviour
         {
             MoveX = -MoveX;
             MoveY = -MoveY;
+            Sprite1.flipY = !(Sprite1.flipY);
             Debug.Log("Mirror Hit");
         }
         
@@ -90,9 +96,7 @@ public class MouseScript : MonoBehaviour
                 case (0, -4):
                     MoveX = 4;
                     MoveY = 0;
-                    transform.position =  new Vector2(transform.position.x,
-                        transform.position.y + (float)0.1);
-                    Debug.Log("Test");
+                    
                     break;
                 case (4, 0):
                     MoveX = 0;
