@@ -53,7 +53,7 @@ public class DoorChange : MonoBehaviour
     void Update()
     {
         ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
-        if (clicked == true)
+        if (clicked == true && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false)
         {
             Debug.Log(GhostNr);
             foreach (GameObject door in Doors)
@@ -108,11 +108,13 @@ public class DoorChange : MonoBehaviour
             if (gameObject.transform.rotation.eulerAngles.z > ghost.transform.rotation.eulerAngles.z)
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
+                Pivotpoint.transform.Rotate(Vector3.back, Space.Self);
                 break;
             }
             if (gameObject.transform.rotation.eulerAngles.z < ghost.transform.rotation.eulerAngles.z)
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, 1);
+                Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
                 break;
             }
         }
