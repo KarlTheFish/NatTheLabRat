@@ -75,6 +75,15 @@ public class DoorChange : MonoBehaviour
             }
             DoorRotate();
         }
+        else
+        {
+            if (clicked == true &&
+                GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == true)
+            {
+                clicked = false;
+            }
+        }
+        
         
         if (GhostNr > Ghosts.Count)
         {

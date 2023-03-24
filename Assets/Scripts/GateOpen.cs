@@ -28,7 +28,6 @@ public class GateOpen : MonoBehaviour
         RightGateOGpos = RightGate.transform.rotation;
         LeftGateOGpos1 = LeftGate.transform.position;
         RightGateOGpos1 = RightGate.transform.position;
-        GameObject.Find("Mouse").GetComponent<MouseScript>().RotateReps = 0;
     }
 
     // Update is called once per frame

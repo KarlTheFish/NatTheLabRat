@@ -16,10 +16,8 @@ public class MouseScript : MonoBehaviour
     private Vector2 StartPosition;
     GameObject RightGate;
     GameObject LeftGate;
-    public int RotateReps;
     static int level = 1;
     public GameObject[] Doors;
-    public bool ButtonPressed;
     public SpriteRenderer Sprite1;
 
     // Start is called before the first frame update
@@ -50,67 +48,75 @@ public class MouseScript : MonoBehaviour
         }
     }
 
+    private static IEnumerator Wait()
+    {
+        yield return new WaitForSecondsRealtime(20);
+    }
+
     private void OnTriggerEnter2D(Collider2D boxCollider2D)
     {
-        Debug.Log(boxCollider2D.GameObject().name);
+    Debug.Log(boxCollider2D.GameObject().name);
 
-        if (boxCollider2D.GameObject().name == "Cheese")
-        {
+    if (boxCollider2D.GameObject().name == "Cheese")
+    {
             MoveX = 0;
-            MoveY = 0;
-            Debug.Log("Cheesed!");
-            level = level + 1;
-            SceneManager.LoadScene(level);
-        }
-        
+        MoveY = 0;
+        Debug.Log("Cheesed!");
+        StartCoroutine(Wait());
+        level = level + 1;
+        SceneManager.LoadScene(level);
+    }
+
+    else
+    {
         if (boxCollider2D.GameObject().CompareTag("Reset"))
         {
             MoveX = 0;
             MoveY = 0;
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             MovePermission = false;
             transform.position = StartPosition;
             LeftGate.transform.position = LeftGate.GetComponent<GateOpen>().LeftGateOGpos1;
             RightGate.transform.position = RightGate.GetComponent<GateOpen>().RightGateOGpos1;
             gameObject.GetComponent<Animator>().enabled = false;
-            RotateReps = 0;
-            foreach (var door in Doors )
-            {
-                door.GetComponent<BoxCollider2D>().isTrigger = true;
-            }
 
         }
 
-        if (boxCollider2D.GameObject().name == "Mirror")
-        {
-            MoveX = -MoveX;
-            MoveY = -MoveY;
-            Sprite1.flipY = !(Sprite1.flipY);
-            Debug.Log("Mirror Hit");
-        }
-        
         else
         {
-            transform.Rotate(new Vector3(0, 0, 90), Space.Self);
-            //transform.position = new Vector2(transform.position.x - (float)0.01, transform.position.y - (float)0.01);
-            switch ((MoveX, MoveY))
+            if (boxCollider2D.GameObject().name == "Mirror")
             {
-                case (0, -4):
-                    MoveX = 4;
-                    MoveY = 0;
-                    break;
-                case (4, 0):
-                    MoveX = 0;
-                    MoveY = 4;
-                    break;
-                case (0, 4):
-                    MoveX = -4;
-                    MoveY = 0;
-                    break;
-                case (-4, 0):
-                    MoveX = 0;
-                    MoveY = -4;
-                    break;
+                MoveX = -MoveX;
+                MoveY = -MoveY;
+                Sprite1.flipY = !(Sprite1.flipY);
+                Debug.Log("Mirror Hit");
+            }
+
+            else
+            {
+                Debug.Log("!!!");
+                transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+                switch ((MoveX, MoveY))
+                {
+                    case (0, -4):
+                        MoveX = 4;
+                        MoveY = 0;
+                        break;
+                    case (4, 0):
+                        MoveX = 0;
+                        MoveY = 4;
+                        break;
+                    case (0, 4):
+                        MoveX = -4;
+                        MoveY = 0;
+                        break;
+                    case (-4, 0):
+                        MoveX = 0;
+                        MoveY = -4;
+                        break;
+                }
             }
         }
+    }
     }
 }
