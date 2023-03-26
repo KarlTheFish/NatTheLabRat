@@ -9,16 +9,18 @@ using UnityEngine.SceneManagement;
 
 public class MouseScript : MonoBehaviour
 {
-    private float MoveX = 0;
+    public float MoveX = 0;
     public float MoveY = -4;
     private Vector2 Movement;
     public bool MovePermission = false;
-    private Vector2 StartPosition;
-    GameObject RightGate;
-    GameObject LeftGate;
+    public Vector2 StartPosition;
+    public GameObject RightGate;
+    public GameObject LeftGate;
     static int level = 1;
     public GameObject[] Doors;
     public SpriteRenderer Sprite1;
+    private GameObject GameManager;
+    private Manager Manager;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class MouseScript : MonoBehaviour
         LeftGate = GameObject.Find("LeftGate");
         Doors = GameObject.FindGameObjectsWithTag("Door");
         Sprite1 = gameObject.GetComponent<SpriteRenderer>();
+        GameManager = GameObject.Find("GameManager");
+        Manager = GameManager.GetComponent<Manager>();
     }
 
     // Update is called once per frame
@@ -59,7 +63,7 @@ public class MouseScript : MonoBehaviour
 
     if (boxCollider2D.GameObject().name == "Cheese")
     {
-            MoveX = 0;
+        MoveX = 0;
         MoveY = 0;
         Debug.Log("Cheesed!");
         StartCoroutine(Wait());
@@ -71,15 +75,7 @@ public class MouseScript : MonoBehaviour
     {
         if (boxCollider2D.GameObject().CompareTag("Reset"))
         {
-            MoveX = 0;
-            MoveY = 0;
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            MovePermission = false;
-            transform.position = StartPosition;
-            LeftGate.transform.position = LeftGate.GetComponent<GateOpen>().LeftGateOGpos1;
-            RightGate.transform.position = RightGate.GetComponent<GateOpen>().RightGateOGpos1;
-            gameObject.GetComponent<Animator>().enabled = false;
-
+            Manager.Reset();
         }
 
         else
