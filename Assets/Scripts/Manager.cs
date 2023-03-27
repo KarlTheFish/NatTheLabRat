@@ -6,13 +6,15 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    private MouseScript MouseScript;
+    public MouseScript MouseScript;
     public GameObject Mouse;
     // Start is called before the first frame update
     void Start()
     {
         Mouse = GameObject.Find("Mouse");
+        Debug.Log(Mouse);
         MouseScript = Mouse.GetComponent<MouseScript>();
+        Debug.Log(MouseScript);
     }
 
     // Update is called once per frame
@@ -22,7 +24,6 @@ public class Manager : MonoBehaviour
     }
 
     public void Reset() {
-        Debug.Log("CYKA BLYAT!");
         MouseScript.MoveX = 0;
         MouseScript.MoveY = 0;
         Mouse.transform.rotation = Quaternion.Euler(0, 0, 0);

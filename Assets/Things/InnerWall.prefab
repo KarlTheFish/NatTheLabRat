@@ -102,6 +102,10 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
       value: Wall (13)
@@ -200,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4335c7d029f040d7989b3d8dfefc8eaa, type: 3}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
       value: Wall (14)
@@ -298,6 +306,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4335c7d029f040d7989b3d8dfefc8eaa, type: 3}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
       value: Wall (15)
@@ -371,6 +383,10 @@ PrefabInstance:
     - target: {fileID: 8396321557255421170, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name

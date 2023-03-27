@@ -14,7 +14,6 @@ public class GateOpen : MonoBehaviour
     private GameObject RightGate;
     private GameObject LeftGateGhost;
     private GameObject RightGateGhost;
-    private bool Complete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +42,8 @@ public class GateOpen : MonoBehaviour
         {
             LeftGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             RightGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            LeftGate.GetComponent<BoxCollider2D>().enabled = false;
+            RightGate.GetComponent<BoxCollider2D>().enabled = false;
             OpenGate();
         }
         
@@ -63,8 +64,7 @@ public class GateOpen : MonoBehaviour
             RightGate.transform.position = Vector3.MoveTowards(RightGate.transform.position, RightGateGhost.transform.position, Time.deltaTime * 0.2f);
             yield return null;
         }
-
-        Complete = true;
+        
         GateOpened = false;
         GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = true;
     }

@@ -45,8 +45,6 @@ public class DoorChange : MonoBehaviour
                 break;
             }
         }
-
-        //Doors.Remove(gameObject);
     }
 
     // Update is called once per frame
@@ -55,7 +53,6 @@ public class DoorChange : MonoBehaviour
         ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
         if (clicked == true && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false)
         {
-            Debug.Log(GhostNr);
             foreach (GameObject door in Doors)
             {
                 if (Vector2.Distance(door.transform.position, ghost.transform.position) < 0.01 && door.name != gameObject.name)
@@ -69,8 +66,6 @@ public class DoorChange : MonoBehaviour
                     {
                         GhostNr = GhostNr - 1;
                     }
-                    Debug.Log(door.name + Vector2.Distance(door.transform.position, ghost.transform.position));
-                    Debug.Log("Something in the way!");
                 }
             }
             DoorRotate();

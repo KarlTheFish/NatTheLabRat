@@ -85,12 +85,10 @@ public class MouseScript : MonoBehaviour
                 MoveX = -MoveX;
                 MoveY = -MoveY;
                 Sprite1.flipY = !(Sprite1.flipY);
-                Debug.Log("Mirror Hit");
             }
 
             else
             {
-                Debug.Log("!!!");
                 transform.Rotate(new Vector3(0, 0, 90), Space.Self);
                 switch ((MoveX, MoveY))
                 {
