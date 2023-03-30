@@ -9,7 +9,7 @@ public class GateOpen : MonoBehaviour
     public Quaternion RightGateOGpos;
     public Vector2 LeftGateOGpos1;
     public Vector2 RightGateOGpos1;
-    private bool GateOpened = false;
+    public bool GateOpened = false;
     private GameObject LeftGate;
     private GameObject RightGate;
     private GameObject LeftGateGhost;
@@ -32,28 +32,13 @@ public class GateOpen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GateOpened == false)
-        {
-            LeftGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            RightGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        }
 
         if (GateOpened == true)
         {
-            LeftGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            RightGate.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            LeftGate.GetComponent<BoxCollider2D>().enabled = false;
-            RightGate.GetComponent<BoxCollider2D>().enabled = false;
             OpenGate();
         }
         
         
-    }
-
-    private void OnMouseDown()
-    {
-        GateOpened = true;
-        GameObject.Find("Mouse").GetComponent<MouseScript>().MoveY = -4;
     }
 
     IEnumerator MoveGates()
@@ -69,7 +54,7 @@ public class GateOpen : MonoBehaviour
         GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = true;
     }
 
-    void OpenGate()
+    public void OpenGate()
     {
         StartCoroutine(MoveGates());
     }

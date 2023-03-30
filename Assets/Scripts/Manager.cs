@@ -10,6 +10,8 @@ public class Manager : MonoBehaviour
     public MouseScript MouseScript;
     public GameObject Mouse;
     public static int level;
+    public GameObject Gates;
+    public bool GameStarted;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,10 @@ public class Manager : MonoBehaviour
         MouseScript = Mouse.GetComponent<MouseScript>();
         Debug.Log(MouseScript);
         level = 1;
+        
+        Gates = GameObject.Find("Gates");
+        
+        GameStarted = false;
     }
 
     // Update is called once per frame
@@ -35,11 +41,24 @@ public class Manager : MonoBehaviour
         MouseScript.LeftGate.transform.position = MouseScript.LeftGate.GetComponent<GateOpen>().LeftGateOGpos1;
         MouseScript.RightGate.transform.position = MouseScript.RightGate.GetComponent<GateOpen>().RightGateOGpos1;
         Mouse.GetComponent<Animator>().enabled = false;
+        GameStarted = false;
     }
 
     public void Play()
     {
         level = level + 1;
         SceneManager.LoadScene(level);
+    }
+    
+    public void StartGame()
+    {
+        if (GameStarted == false) {
+           Gates.GetComponent<GateOpen>().GateOpened = true;
+           Mouse.GetComponent<MouseScript>().MoveY = -4;
+           GameStarted = true;
+        }
+        else {
+            Debug.Log("You can't start it again, you silly silly silly silly silly silly silly goose!");
+        }
     }
 }

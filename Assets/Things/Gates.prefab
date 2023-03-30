@@ -52,6 +52,7 @@ MonoBehaviour:
   RightGateOGpos: {x: 0, y: 0, z: 0, w: 0}
   LeftGateOGpos1: {x: 0, y: 0}
   RightGateOGpos1: {x: 0, y: 0}
+  GateOpened: 0
 --- !u!1 &764201219982496762
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,8 +63,6 @@ GameObject:
   m_Component:
   - component: {fileID: 764201219982496645}
   - component: {fileID: 764201219982496644}
-  - component: {fileID: 764201219982496646}
-  - component: {fileID: 764201219982496647}
   - component: {fileID: 764201219982496641}
   m_Layer: 0
   m_Name: RightGate
@@ -139,53 +138,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &764201219982496646
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764201219982496762}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.03, y: 0.62}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!50 &764201219982496647
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764201219982496762}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &764201219982496641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +154,7 @@ MonoBehaviour:
   RightGateOGpos: {x: 0, y: 0, z: 0, w: 0}
   LeftGateOGpos1: {x: 0, y: 0}
   RightGateOGpos1: {x: 0, y: 0}
+  GateOpened: 0
 --- !u!1 &764201220179564399
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,9 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 764201220179564398}
   - component: {fileID: 764201220179564393}
-  - component: {fileID: 764201220179564392}
   - component: {fileID: 764201220179564395}
-  - component: {fileID: 764201220179564394}
   m_Layer: 0
   m_Name: LeftGate
   m_TagString: Untagged
@@ -289,27 +240,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &764201220179564392
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764201220179564399}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &764201220179564395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,32 +256,7 @@ MonoBehaviour:
   RightGateOGpos: {x: 0, y: 0, z: 0, w: 0}
   LeftGateOGpos1: {x: 0, y: 0}
   RightGateOGpos1: {x: 0, y: 0}
---- !u!61 &764201220179564394
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764201220179564399}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.03, y: 0.62}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  GateOpened: 0
 --- !u!1 &2367028411049655726
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,9 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5079900432380475790}
   - component: {fileID: 3794611101541286855}
-  - component: {fileID: 948315676940892279}
   - component: {fileID: 1152825002147758968}
-  - component: {fileID: 42945255672180575}
   m_Layer: 0
   m_Name: LeftGateGhost
   m_TagString: Untagged
@@ -439,27 +342,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &948315676940892279
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367028411049655726}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &1152825002147758968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,32 +358,7 @@ MonoBehaviour:
   RightGateOGpos: {x: 0, y: 0, z: 0, w: 0}
   LeftGateOGpos1: {x: 0, y: 0}
   RightGateOGpos1: {x: 0, y: 0}
---- !u!61 &42945255672180575
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367028411049655726}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  GateOpened: 0
 --- !u!1 &4825753920728756606
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,9 +369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3282037247578662615}
   - component: {fileID: 6905236512451471616}
-  - component: {fileID: 784019311327939261}
   - component: {fileID: 1816813579258775132}
-  - component: {fileID: 1087804900243022327}
   m_Layer: 0
   m_Name: RightGateGhost
   m_TagString: Untagged
@@ -589,27 +444,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &784019311327939261
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4825753920728756606}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &1816813579258775132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,29 +460,4 @@ MonoBehaviour:
   RightGateOGpos: {x: 0, y: 0, z: 0, w: 0}
   LeftGateOGpos1: {x: 0, y: 0}
   RightGateOGpos1: {x: 0, y: 0}
---- !u!61 &1087804900243022327
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4825753920728756606}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  GateOpened: 0
