@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
@@ -12,18 +13,26 @@ public class Manager : MonoBehaviour
     public static int level;
     public GameObject Gates;
     public bool GameStarted;
+    public GameObject Paused;
+
+    [CanBeNull] public GameObject Mirror;
     // Start is called before the first frame update
     void Start()
     {
         Mouse = GameObject.Find("Mouse");
-        Debug.Log(Mouse);
         MouseScript = Mouse.GetComponent<MouseScript>();
-        Debug.Log(MouseScript);
         level = 1;
         
         Gates = GameObject.Find("Gates");
         
         GameStarted = false;
+        
+        if(GameObject.FindWithTag("Mirror") != null) {
+            Mirror = GameObject.FindWithTag("Mirror");
+        }
+        
+        Paused = GameObject.Find("Paused");
+        Paused.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,6 +51,8 @@ public class Manager : MonoBehaviour
         MouseScript.RightGate.transform.position = MouseScript.RightGate.GetComponent<GateOpen>().RightGateOGpos1;
         Mouse.GetComponent<Animator>().enabled = false;
         GameStarted = false;
+        Mouse.GetComponent<SpriteRenderer>().flipY = false;
+        Mirror.transform.position = Mirror.GetComponent<MirrorScript>().OGpos;
     }
 
     public void Play()
@@ -60,5 +71,10 @@ public class Manager : MonoBehaviour
         else {
             Debug.Log("You can't start it again, you silly silly silly silly silly silly silly goose!");
         }
+    }
+
+    public void PauseMenu()
+    {
+        Paused.SetActive(!Paused.activeSelf);
     }
 }

@@ -76,7 +76,7 @@ public class MouseScript : MonoBehaviour
         if (boxCollider2D.GameObject().CompareTag("Reset"))
         {
             Manager.Reset();
-        }
+        } 
 
         else
         {

@@ -9,11 +9,14 @@ public class MirrorScript : MonoBehaviour
     private float mouseX = 0;
     private float mouseY = 0;
     private Vector2 mouseMovement;
+    public Vector3 OGpos;
+    bool isColliding = false;
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject.tag = "Mirror";
+        OGpos = transform.position;
     }
 
     // Update is called once per frame
@@ -32,6 +35,24 @@ public class MirrorScript : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        transform.position = transform.position + (Vector3)mouseMovement;
+        Debug.Log(isColliding);
+        if (isColliding == false)
+        {
+            transform.position = transform.position + (Vector3)mouseMovement;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(gameObject.transform.position, OGpos, Time.deltaTime * 0.2f);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isColliding = true;
+    }
+    
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isColliding = false;
     }
 }
