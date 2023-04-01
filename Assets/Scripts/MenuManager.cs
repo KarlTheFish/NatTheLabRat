@@ -16,11 +16,12 @@ public class MenuManager : MonoBehaviour
     {
         MainMenu = GameObject.Find("MainMenu");
         CreditsMenu = GameObject.Find("CreditsWindow");
-        //SettingsMenu = GameObject.Find("SettingsMenu");
+        SettingsMenu = GameObject.Find("SettingsWindow");
         
         gameObject.GetComponent<Manager>().enabled = false;
         
         CreditsMenu.SetActive(false);
+        SettingsMenu.SetActive(false);
         
     }
 
@@ -40,5 +41,11 @@ public class MenuManager : MonoBehaviour
     {
         MainMenu.SetActive(!MainMenu.activeSelf);
         CreditsMenu.SetActive(!CreditsMenu.activeSelf);
+    }
+    
+    public void SettingsMenuSet()
+    {
+        MainMenu.SetActive(!MainMenu.activeSelf);
+        SettingsMenu.SetActive(!SettingsMenu.activeSelf);
     }
 }
