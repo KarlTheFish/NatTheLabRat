@@ -14,6 +14,7 @@ public class Manager : MonoBehaviour
     public GameObject Gates;
     public bool GameStarted;
     public GameObject Paused;
+    public bool PlayerPressed;
 
     [CanBeNull] public GameObject Mirror;
     // Start is called before the first frame update
@@ -52,13 +53,21 @@ public class Manager : MonoBehaviour
         Mouse.GetComponent<Animator>().enabled = false;
         GameStarted = false;
         Mouse.GetComponent<SpriteRenderer>().flipY = false;
-        Mirror.transform.position = Mirror.GetComponent<MirrorScript>().OGpos;
+        if(PlayerPressed == true) {
+            Mirror.transform.position = Mirror.GetComponent<MirrorScript>().OGpos;
+        }
+    }
+
+    public void PlayerPress()
+    {
+        PlayerPressed = true;
     }
 
     public void Play()
     {
         level = level + 1;
         SceneManager.LoadScene(level);
+        PlayerPressed = false;
     }
     
     public void StartGame()

@@ -334,6 +334,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 744163152857065739}
+        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+        m_MethodName: PlayerPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &744163152503743843
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +499,7 @@ MonoBehaviour:
   Gates: {fileID: 0}
   GameStarted: 0
   Paused: {fileID: 0}
+  PlayerPressed: 0
   Mirror: {fileID: 0}
 --- !u!1 &1948275884991165830
 GameObject:
