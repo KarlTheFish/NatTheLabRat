@@ -77,4 +77,9 @@ public class Manager : MonoBehaviour
     {
         Paused.SetActive(!Paused.activeSelf);
     }
+
+    public void CreditsMenu()
+    {
+        
+    }
 }
