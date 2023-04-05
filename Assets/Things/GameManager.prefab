@@ -44,4 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3983e0128863e694b40c5b1736fbf08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MouseScript: {fileID: 0}
   Mouse: {fileID: 0}
+  Gates: {fileID: 0}
+  GameStarted: 0
+  Paused: {fileID: 0}
+  PlayerPressed: 0
+  Mirror: {fileID: 0}

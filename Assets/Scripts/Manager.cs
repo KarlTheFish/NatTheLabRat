@@ -15,7 +15,7 @@ public class Manager : MonoBehaviour
     public bool GameStarted;
     public GameObject Paused;
     public bool PlayerPressed;
-
+    
     [CanBeNull] public GameObject Mirror;
     // Start is called before the first frame update
     void Start()

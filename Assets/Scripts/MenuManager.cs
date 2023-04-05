@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
         MainMenu = GameObject.Find("MainMenu");
         CreditsMenu = GameObject.Find("CreditsWindow");
         SettingsMenu = GameObject.Find("SettingsWindow");
-        
+
         gameObject.GetComponent<Manager>().enabled = false;
         
         CreditsMenu.SetActive(false);

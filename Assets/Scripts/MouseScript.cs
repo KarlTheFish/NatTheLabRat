@@ -16,7 +16,7 @@ public class MouseScript : MonoBehaviour
     public Vector2 StartPosition;
     public GameObject RightGate;
     public GameObject LeftGate;
-    static int level = 1;
+    static int level = 2;
     public GameObject[] Doors;
     public SpriteRenderer Sprite1;
     private GameObject GameManager;
