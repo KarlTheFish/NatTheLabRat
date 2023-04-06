@@ -34,6 +34,8 @@ public class Manager : MonoBehaviour
         
         Paused = GameObject.Find("Paused");
         Paused.SetActive(false);
+        
+        GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
     }
 
     // Update is called once per frame
@@ -85,6 +87,16 @@ public class Manager : MonoBehaviour
     public void PauseMenu()
     {
         Paused.SetActive(!Paused.activeSelf);
+        if (Paused.activeSelf)
+        {
+            GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().VolumeButton = GameObject.Find("MusicLevel");
+            GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolumeSprite();
+        }
+    }
+
+    public void VolumeChange()
+    {
+        GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().SetVolume();
     }
 
     public void CreditsMenu()
