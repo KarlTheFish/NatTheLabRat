@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     public GameObject AudioPlayer;
 
     public GameObject VolumeButton;
-    
+
     private AudioClip Gameplay;
 
     private bool GameStarted;
@@ -60,17 +60,30 @@ public class MenuManager : MonoBehaviour
 
     public void CreditsMenuSet()
     {
-        MainMenu.SetActive(!MainMenu.activeSelf);
-        CreditsMenu.SetActive(!CreditsMenu.activeSelf);
+        StartCoroutine(Credits());
     }
     
     public void SettingsMenuSet()
     {
+        StartCoroutine(Settings());
+    }
+
+    IEnumerator Settings()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
         MainMenu.SetActive(!MainMenu.activeSelf);
         SettingsMenu.SetActive(!SettingsMenu.activeSelf);
         if (SettingsMenu.activeSelf)
         {
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().VolumeButton = GameObject.Find("MusicLevel");
+            GameObject.Find("MenuSound").GetComponent<MenuVolume>().MenuVolumeButton = GameObject.Find("MenuLevel");
         }
+    }
+
+    IEnumerator Credits()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        MainMenu.SetActive(!MainMenu.activeSelf);
+        CreditsMenu.SetActive(!CreditsMenu.activeSelf);
     }
 }

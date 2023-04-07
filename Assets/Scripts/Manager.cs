@@ -36,6 +36,7 @@ public class Manager : MonoBehaviour
         Paused.SetActive(false);
         
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
+        GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class Manager : MonoBehaviour
         Mouse.GetComponent<Animator>().enabled = false;
         GameStarted = false;
         Mouse.GetComponent<SpriteRenderer>().flipY = false;
-        if(PlayerPressed == true) {
+        if(PlayerPressed == true && Mirror != null) {
             Mirror.transform.position = Mirror.GetComponent<MirrorScript>().OGpos;
         }
     }
@@ -91,6 +92,8 @@ public class Manager : MonoBehaviour
         {
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().VolumeButton = GameObject.Find("MusicLevel");
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolumeSprite();
+            GameObject.Find("MenuSound").GetComponent<MenuVolume>().MenuVolumeButton = GameObject.Find("MenuLevel");
+            GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolumeSprite();
         }
     }
 
@@ -98,9 +101,14 @@ public class Manager : MonoBehaviour
     {
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().SetVolume();
     }
-
-    public void CreditsMenu()
+    
+    public void MenuVolumeChange()
     {
-        
+        GameObject.Find("MenuSound").GetComponent<MenuVolume>().SetVolume();
+    }
+
+    public void PlayButtonSound()
+    {
+        GameObject.Find("MenuSound").GetComponent<AudioSource>().Play();
     }
 }

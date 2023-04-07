@@ -11,13 +11,14 @@ public class MusicVolume : MonoBehaviour
     [CanBeNull] public GameObject VolumeButton;
     
     
+    
     // Start is called before the first frame update
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = 0.5f;
         gameObject.GetComponent<AudioSource>().volume = 0.5f;
         gameObject.GetComponent<AudioSource>().Stop();
-        
+
         VolumeState = 2;
     }
 
