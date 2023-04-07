@@ -18,6 +18,8 @@ public class DoorChange : MonoBehaviour
     public int GhostNr;
     private bool GhostReverse;
     private List<GameObject> Doors = new List<GameObject>();
+    
+    //TODO: Add sound effect when door has finished moving
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,8 @@ public class DoorChange : MonoBehaviour
                     }
                 }
             }
-            DoorRotate();
+
+            StartCoroutine(DoorRotate());
         }
         else
         {
@@ -79,6 +82,7 @@ public class DoorChange : MonoBehaviour
             }
         }
         
+        //These if statements are to make sure the ghost number doesn't go out of bounds
         
         if (GhostNr > Ghosts.Count)
         {
@@ -99,13 +103,14 @@ public class DoorChange : MonoBehaviour
         }
 
     }
-
+    
     private void OnMouseDown()
     {
         clicked = true;
     }
-
-    void DoorRotate()
+    
+    //This coroutine is to rotate the door to the correct position
+    IEnumerator DoorRotate()
     {
         while (gameObject.transform.rotation != ghost.transform.rotation)
         {
@@ -113,16 +118,19 @@ public class DoorChange : MonoBehaviour
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
                 Pivotpoint.transform.Rotate(Vector3.back, Space.Self);
+                yield return new WaitForSecondsRealtime(0.1f);
                 break;
             }
             if (gameObject.transform.rotation.eulerAngles.z < ghost.transform.rotation.eulerAngles.z)
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, 1);
                 Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
+                yield return new WaitForSecondsRealtime(0.1f);
                 break;
             }
         }
         
+        //This if statement is to make sure the door is in the correct position
         if (gameObject.transform.rotation == ghost.transform.rotation)
         {
             GhostDoorRotate();
@@ -138,6 +146,7 @@ public class DoorChange : MonoBehaviour
             {
                 GhostNr = GhostNr - 1;
             }
+            StopCoroutine(DoorRotate());
         }
         
     }

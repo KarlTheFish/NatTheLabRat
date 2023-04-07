@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MusicVolume : MonoBehaviour
 {
     public static int VolumeState;
     [CanBeNull] public GameObject VolumeButton;
-    
+    public int Level;
     
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class MusicVolume : MonoBehaviour
         gameObject.GetComponent<AudioSource>().volume = 0.5f;
         gameObject.GetComponent<AudioSource>().Stop();
 
+        Level = SceneManager.GetActiveScene().buildIndex;
         VolumeState = 2;
     }
 

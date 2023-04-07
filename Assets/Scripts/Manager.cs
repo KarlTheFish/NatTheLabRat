@@ -10,41 +10,42 @@ public class Manager : MonoBehaviour
 {
     public MouseScript MouseScript;
     public GameObject Mouse;
-    public static int level;
     public GameObject Gates;
     public bool GameStarted;
     public GameObject Paused;
+    public GameObject Success;
     public bool PlayerPressed;
     
     [CanBeNull] public GameObject Mirror;
+
     // Start is called before the first frame update
     void Start()
     {
         Mouse = GameObject.Find("Mouse");
-        MouseScript = Mouse.GetComponent<MouseScript>();
-        level = 1;
-        
-        Gates = GameObject.Find("Gates");
+        MouseScript = Mouse.GetComponent<MouseScript>(); // Get the MouseScript component from the Mouse object
+
+        Gates = GameObject.Find("Gates"); // Get the Gates object
         
         GameStarted = false;
         
+        // This is a bit of a hacky way to get the Mirror object, but it works
         if(GameObject.FindWithTag("Mirror") != null) {
             Mirror = GameObject.FindWithTag("Mirror");
         }
         
+        // Find the Paused and Success objects and set them to inactive
         Paused = GameObject.Find("Paused");
         Paused.SetActive(false);
+
+        Success = GameObject.Find("Success");
+        Success.SetActive(false);
         
+        // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // This is called when the player presses the reset button and resets the level
     public void Reset() {
         MouseScript.MoveX = 0;
         MouseScript.MoveY = 0;
@@ -59,17 +60,19 @@ public class Manager : MonoBehaviour
         if(PlayerPressed == true && Mirror != null) {
             Mirror.transform.position = Mirror.GetComponent<MirrorScript>().OGpos;
         }
+        if(Success.activeSelf == true) {
+            Success.SetActive(false);
+        }
     }
-
+    
     public void PlayerPress()
     {
         PlayerPressed = true;
     }
-
+    
     public void Play()
     {
-        level = level + 1;
-        SceneManager.LoadScene(level);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         PlayerPressed = false;
     }
     
@@ -82,9 +85,11 @@ public class Manager : MonoBehaviour
         }
         else {
             Debug.Log("You can't start it again, you silly silly silly silly silly silly silly goose!");
+            // This is a debug message that I put in to make sure that the player can't start the game twice
         }
     }
 
+    //This is called when the player presses the pause button
     public void PauseMenu()
     {
         Paused.SetActive(!Paused.activeSelf);
@@ -110,5 +115,11 @@ public class Manager : MonoBehaviour
     public void PlayButtonSound()
     {
         GameObject.Find("MenuSound").GetComponent<AudioSource>().Play();
+    }
+
+    public void LevelComplete()
+    {
+        Success.SetActive(true);
+        GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = false;
     }
 }

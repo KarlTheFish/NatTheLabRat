@@ -7,6 +7,13 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// This script is attached to the Mouse object and handles the movement of the mouse. 
+// It also handles the opening and closing of the gates.
+// It also handles the animation of the mouse.
+// It also handles the rotation of the mouse.
+// It also handles the flipping of the mouse sprite.
+// It is kind of a mess, but it works.
+
 public class MouseScript : MonoBehaviour
 {
     public float MoveX = 0;
@@ -52,11 +59,6 @@ public class MouseScript : MonoBehaviour
         }
     }
 
-    private static IEnumerator Wait()
-    {
-        yield return new WaitForSecondsRealtime(20);
-    }
-
     private void OnTriggerEnter2D(Collider2D boxCollider2D)
     {
     Debug.Log(boxCollider2D.GameObject().name);
@@ -66,9 +68,7 @@ public class MouseScript : MonoBehaviour
         MoveX = 0;
         MoveY = 0;
         Debug.Log("Cheesed!");
-        StartCoroutine(Wait());
-        level = level + 1;
-        SceneManager.LoadScene(level);
+        GameManager.GetComponent<Manager>().LevelComplete();
     }
 
     else

@@ -42,7 +42,7 @@ public class MenuManager : MonoBehaviour
         if (GameStarted == true)
         {
             gameObject.GetComponent<Manager>().enabled = true;
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
         {
