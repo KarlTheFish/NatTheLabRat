@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 // This script is attached to the Mouse object and handles the movement of the mouse. 
 // It also handles the opening and closing of the gates.

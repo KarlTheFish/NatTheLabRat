@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,8 +9,6 @@ public class MenuManager : MonoBehaviour
     private GameObject SettingsMenu;
     
     public GameObject AudioPlayer;
-
-    public GameObject VolumeButton;
 
     private AudioClip Gameplay;
 
