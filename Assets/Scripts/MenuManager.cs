@@ -25,8 +25,8 @@ public class MenuManager : MonoBehaviour
         
         AudioPlayer = GameObject.Find("AudioPlayer");
 
-        gameObject.GetComponent<Manager>().enabled = false;
-        
+        //gameObject.GetComponent<Manager>().enabled = false;
+
         CreditsMenu.SetActive(false);
         SettingsMenu.SetActive(false);
 
@@ -36,19 +36,14 @@ public class MenuManager : MonoBehaviour
     {
         if (GameStarted == true)
         {
-            gameObject.GetComponent<Manager>().enabled = true;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-        else
-        {
-            gameObject.GetComponent<Manager>().enabled = false;
+            gameObject.GetComponent<Manager>().FadeIn();
         }
     }
     
     public void StartGame()
     {
-        GameStarted = true;
         GameObject.Find("Main Camera").GetComponent<AudioSource>().mute = true;
+        GameStarted = true;
         AudioPlayer.GetComponent<AudioSource>().Play();
         AudioPlayer.GetComponent<MusicVolume>().VolumeButton = null;
     }

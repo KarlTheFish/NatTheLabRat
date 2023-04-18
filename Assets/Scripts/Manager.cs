@@ -15,14 +15,34 @@ public class Manager : MonoBehaviour
     public GameObject Paused;
     public GameObject Success;
     public bool PlayerPressed;
-    
+    public GameObject Fade;
+
     [CanBeNull] public GameObject Mirror;
 
     // Start is called before the first frame update
     void Start()
     {
+        Fade = GameObject.Find("FadeOverlay");
+        Debug.Log(Fade);
+        Fade.SetActive(false);
+
+        if (Fade.GetComponent<FadeScript>().isMenu == false)
+        {
+            GameStart();
+        }
+    }
+
+    public void FadeIn()
+    {
+        Fade.SetActive(true);
+        Fade.GetComponent<FadeScript>().StartCoroutine(nameof(FadeScript.FadeIn));
+    }
+
+    public void GameStart()
+    {
         Mouse = GameObject.Find("Mouse");
-        MouseScript = Mouse.GetComponent<MouseScript>(); // Get the MouseScript component from the Mouse object
+        Debug.Log(Mouse);
+        MouseScript = Mouse.GetComponent<MouseScript>();
 
         Gates = GameObject.Find("Gates"); // Get the Gates object
         
@@ -40,9 +60,13 @@ public class Manager : MonoBehaviour
         Success = GameObject.Find("Success");
         Success.SetActive(false);
         
+                
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
+
+        Fade.GetComponent<FadeScript>().isMenu = false;
+        Fade.SetActive(false);
     }
 
     // This is called when the player presses the reset button and resets the level
@@ -72,8 +96,8 @@ public class Manager : MonoBehaviour
     
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         PlayerPressed = false;
+        Fade.SetActive(false);
     }
     
     public void StartGame()
@@ -116,10 +140,11 @@ public class Manager : MonoBehaviour
     {
         GameObject.Find("MenuSound").GetComponent<AudioSource>().Play();
     }
-
+    
     public void LevelComplete()
     {
         Success.SetActive(true);
         GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = false;
+        GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().LogLevel();
     }
 }
