@@ -23,13 +23,6 @@ public class Manager : MonoBehaviour
     void Start()
     {
         Fade = GameObject.Find("FadeOverlay");
-        Debug.Log(Fade);
-        Fade.SetActive(false);
-
-        if (Fade.GetComponent<FadeScript>().isMenu == false)
-        {
-            GameStart();
-        }
     }
 
     public void FadeIn()
@@ -41,7 +34,6 @@ public class Manager : MonoBehaviour
     public void GameStart()
     {
         Mouse = GameObject.Find("Mouse");
-        Debug.Log(Mouse);
         MouseScript = Mouse.GetComponent<MouseScript>();
 
         Gates = GameObject.Find("Gates"); // Get the Gates object
@@ -64,9 +56,6 @@ public class Manager : MonoBehaviour
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
-
-        Fade.GetComponent<FadeScript>().isMenu = false;
-        Fade.SetActive(false);
     }
 
     // This is called when the player presses the reset button and resets the level
@@ -97,7 +86,8 @@ public class Manager : MonoBehaviour
     public void Play()
     {
         PlayerPressed = false;
-        Fade.SetActive(false);
+        FadeIn();
+        //Fade.SetActive(false);
     }
     
     public void StartGame()

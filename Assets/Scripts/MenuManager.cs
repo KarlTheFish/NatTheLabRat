@@ -32,18 +32,10 @@ public class MenuManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (GameStarted == true)
-        {
-            gameObject.GetComponent<Manager>().FadeIn();
-        }
-    }
-    
     public void StartGame()
     {
         GameObject.Find("Main Camera").GetComponent<AudioSource>().mute = true;
-        GameStarted = true;
+        gameObject.GetComponent<Manager>().FadeIn();
         AudioPlayer.GetComponent<AudioSource>().Play();
         AudioPlayer.GetComponent<MusicVolume>().VolumeButton = null;
     }

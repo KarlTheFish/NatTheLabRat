@@ -60,7 +60,6 @@ public class MouseScript : MonoBehaviour
     {
         MoveX = 0;
         MoveY = 0;
-        Debug.Log("Cheesed!");
         GameManager.GetComponent<Manager>().LevelComplete();
     }
 

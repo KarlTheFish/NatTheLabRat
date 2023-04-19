@@ -9,6 +9,7 @@ public class LevelsCompleted : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         CompletedList = new List<int>();
     }
 

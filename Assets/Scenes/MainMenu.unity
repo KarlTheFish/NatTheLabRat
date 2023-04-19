@@ -2156,7 +2156,6 @@ GameObject:
   - component: {fileID: 950745360}
   - component: {fileID: 950745359}
   - component: {fileID: 950745358}
-  - component: {fileID: 950745357}
   - component: {fileID: 950745361}
   m_Layer: 0
   m_Name: MenuSound
@@ -2165,18 +2164,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &950745357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950745356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22d9b63c119aaf342bfd6946ccf6ed44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &950745358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4413,7 +4400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6523700483492599597, guid: 445e3edc3b3e8d989a03b30e9dc3ad5d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 900
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6523700483492599597, guid: 445e3edc3b3e8d989a03b30e9dc3ad5d, type: 3}
       propertyPath: m_LocalPosition.x

@@ -10,17 +10,15 @@ public class MusicVolume : MonoBehaviour
 {
     public static int VolumeState;
     [CanBeNull] public GameObject VolumeButton;
-    public int Level;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<AudioSource>().volume = 0.5f;
         gameObject.GetComponent<AudioSource>().volume = 0.5f;
         gameObject.GetComponent<AudioSource>().Stop();
-
-        Level = SceneManager.GetActiveScene().buildIndex;
+        
         VolumeState = 2;
     }
 
