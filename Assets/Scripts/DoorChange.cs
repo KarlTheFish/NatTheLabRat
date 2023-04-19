@@ -34,7 +34,6 @@ public class DoorChange : MonoBehaviour
         {
             Doors.Add(door);
         }
-        Debug.Log(Doors.Count);
 
         for (int i = 1; i < 4; i++)
         {
