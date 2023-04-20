@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Script : MonoBehaviour
 {
     public GameObject Fade;
+
+    public int LevelIndexGlobal;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,10 @@ public class Script : MonoBehaviour
         Fade = GameObject.Find("FadeOverlay");
         Fade.GetComponent<FadeScript>().color = new Color(0, 0, 0, 1);
         Fade.GetComponent<Image>().color = Fade.GetComponent<FadeScript>().color;
-        GameObject.Find("GameManager").GetComponent<Manager>().GameStart();
+        if (GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal < 14) //TODO: REMINDER TO SET TO 21 WHEN DONE!!!!!!!!
+        {
+            GameObject.Find("GameManager").GetComponent<Manager>().GameStart();
+        }
         while (Fade.GetComponent<Image>().color.a > 0.0f)
         {
             Fade.GetComponent<FadeScript>().color.a = Fade.GetComponent<FadeScript>().color.a - 0.07f;

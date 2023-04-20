@@ -35,7 +35,6 @@ public class MirrorScript : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log(isColliding);
         if (isColliding == false)
         {
             transform.position = transform.position + (Vector3)mouseMovement;

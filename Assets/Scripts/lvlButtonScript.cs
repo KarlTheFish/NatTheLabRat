@@ -21,6 +21,7 @@ public class lvlButtonScript : MonoBehaviour
     
     void ButtonClick()
     {
-        SceneManager.LoadScene("Level" + index);
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = index;
+        GameObject.Find("GameManager").GetComponent<Manager>().FadeIn();
     }
 }

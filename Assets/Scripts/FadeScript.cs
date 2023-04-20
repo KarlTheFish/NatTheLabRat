@@ -8,6 +8,7 @@ public class FadeScript : MonoBehaviour
 {
     public Color color;
     public bool isMenu = true;
+    public int lvlIndex;
     
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class FadeScript : MonoBehaviour
             gameObject.GetComponent<Image>().color = color;
             yield return new WaitForSecondsRealtime(0.05f);
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal);
         GameObject.Find("AudioPlayer").GetComponent<Script>().StartCoroutine("FadeManager");
     }
 }

@@ -86,6 +86,7 @@ public class Manager : MonoBehaviour
     public void Play()
     {
         PlayerPressed = false;
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = SceneManager.GetActiveScene().buildIndex + 1;
         FadeIn();
         //Fade.SetActive(false);
     }
@@ -114,6 +115,12 @@ public class Manager : MonoBehaviour
             GameObject.Find("MenuSound").GetComponent<MenuVolume>().MenuVolumeButton = GameObject.Find("MenuLevel");
             GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolumeSprite();
         }
+    }
+
+    public void LevelMenu()
+    {
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 14; //REMINDER: CHANGE THIS TO 21 ONCE DONE
+        FadeIn();
     }
 
     public void VolumeChange()

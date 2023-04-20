@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         GameObject.Find("Main Camera").GetComponent<AudioSource>().mute = true;
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 1;
         gameObject.GetComponent<Manager>().FadeIn();
         AudioPlayer.GetComponent<AudioSource>().Play();
         AudioPlayer.GetComponent<MusicVolume>().VolumeButton = null;

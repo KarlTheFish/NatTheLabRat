@@ -13,6 +13,7 @@ public class LevelMenu : MonoBehaviour
 
     private float xPos, yPos;
     private int i;
+    private int j;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +53,9 @@ public class LevelMenu : MonoBehaviour
             text.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
             text.GetComponent<TextMeshProUGUI>().fontSize = 60;
             text.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("NiceSugarFont");
+            button.GetComponent<Transform>().SetAsFirstSibling();
+            
+            
         }
     }
 
