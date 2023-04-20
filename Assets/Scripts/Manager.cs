@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
@@ -17,17 +16,7 @@ public class Manager : MonoBehaviour
     public GameObject Success;
     public bool PlayerPressed;
     public GameObject Fade;
-    
-    public GameObject SuccessWindow;
 
-    public int Seconds;
-    public int Minutes;
-
-    public GameObject SecondsCount;
-    public GameObject MinutesCount;
-
-    private RectTransform SuccessTransform;
-    
     [CanBeNull] public GameObject Mirror;
 
     // Start is called before the first frame update
@@ -67,10 +56,8 @@ public class Manager : MonoBehaviour
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
-
-        StartCoroutine(Count());
     }
-    
+
     // This is called when the player presses the reset button and resets the level
     public void Reset() {
         MouseScript.MoveX = 0;
@@ -86,13 +73,11 @@ public class Manager : MonoBehaviour
         if(PlayerPressed == true && Mirror != null) {
             Mirror.transform.position = Mirror.GetComponent<MirrorScript>().OGpos;
         }
-        if(Success.activeSelf == true)
-        {
-            SuccessTransform.anchoredPosition = new Vector2(0, -708);
+        if(Success.activeSelf == true) {
             Success.SetActive(false);
         }
     }
-
+    
     public void PlayerPress()
     {
         PlayerPressed = true;
@@ -115,24 +100,6 @@ public class Manager : MonoBehaviour
         else {
             Debug.Log("You can't start it again, you silly silly silly silly silly silly silly goose!");
             // This is a debug message that I put in to make sure that the player can't start the game twice
-        }
-    }
-
-    public IEnumerator Count()
-    {
-        while (SuccessWindow == null)
-        {
-            Seconds += 1;
-            yield return new WaitForSecondsRealtime(1);
-            if (Seconds == 60)
-            {
-                Minutes += 1;
-                Seconds = 0;
-            }
-        }
-        if(SuccessWindow != null)
-        {
-            StopCoroutine(Count());
         }
     }
 
@@ -167,42 +134,7 @@ public class Manager : MonoBehaviour
     public void LevelComplete()
     {
         Success.SetActive(true);
-        SuccessWindow = GameObject.Find("SuccessWindow");
-        SuccessTransform = SuccessWindow.GetComponent<RectTransform>();
-        MinutesCount = GameObject.Find("Minutes");
-        SecondsCount = GameObject.Find("Seconds");
-
         GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = false;
         GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().LogLevel();
-        StartCoroutine(MoveSuccessWindow());
-        if(Seconds < 10)
-        {
-            SecondsCount.GetComponent<TMP_Text>().text = "0" + Seconds;
-        }
-        else
-        {
-            SecondsCount.GetComponent<TMP_Text>().text = Seconds.ToString();
-        }
-        if(Minutes < 10)
-        {
-            MinutesCount.GetComponent<TMP_Text>().text = "0" + Minutes;
-        }
-        else
-        {
-            MinutesCount.GetComponent<TMP_Text>().text = Minutes.ToString();
-        }
-    }
-
-    IEnumerator MoveSuccessWindow()
-    {
-        while (SuccessTransform.anchoredPosition != Vector2.zero)
-        {
-            SuccessTransform.anchoredPosition = Vector2.MoveTowards(SuccessTransform.anchoredPosition, Vector2.zero, 1000 * Time.deltaTime);
-            yield return new WaitForSecondsRealtime(0.02f);
-            if(SuccessTransform.anchoredPosition == Vector2.zero)
-            {
-                break;
-            }
-        }
     }
 }

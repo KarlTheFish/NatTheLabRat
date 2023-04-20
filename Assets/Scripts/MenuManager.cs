@@ -14,11 +14,8 @@ public class MenuManager : MonoBehaviour
 
     private bool GameStarted;
     
-    //TODO:
-    // Make level selection menu with unlocked and locked levels
-    // Add end credits
     
-
+    
     // Start is called before the first frame update
     void Start()
     {
