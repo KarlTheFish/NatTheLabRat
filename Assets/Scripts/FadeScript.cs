@@ -11,8 +11,7 @@ public class FadeScript : MonoBehaviour
     public int lvlIndex;
     
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         gameObject.GetComponent<Image>().color = color;
     }
 
@@ -21,10 +20,8 @@ public class FadeScript : MonoBehaviour
     {
     }
 
-    public IEnumerator FadeIn()
-    {
-        while (gameObject.GetComponent<Image>().color.a < 1.0f)
-        {
+    public IEnumerator FadeIn() {
+        while (gameObject.GetComponent<Image>().color.a < 1.0f) {
             color.a = color.a + 0.07f;
             gameObject.GetComponent<Image>().color = color;
             yield return new WaitForSecondsRealtime(0.05f);

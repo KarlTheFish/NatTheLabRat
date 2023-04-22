@@ -7,15 +7,13 @@ public class LevelsCompleted : MonoBehaviour
 {
     public List<int> CompletedList;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         DontDestroyOnLoad(gameObject);
         CompletedList = new List<int>();
     }
 
-    public void LogLevel()
-    {
-        CompletedList.Add(SceneManager.GetActiveScene().buildIndex - 1);
+    public void LogLevel() {
+        CompletedList.Add(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log(CompletedList.Count);
     }
 }

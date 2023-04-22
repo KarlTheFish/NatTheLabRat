@@ -39,6 +39,7 @@ public class MenuManager : MonoBehaviour
         gameObject.GetComponent<Manager>().FadeIn();
         AudioPlayer.GetComponent<AudioSource>().Play();
         AudioPlayer.GetComponent<MusicVolume>().VolumeButton = null;
+        GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().LogLevel();
     }
 
     public void CreditsMenuSet()

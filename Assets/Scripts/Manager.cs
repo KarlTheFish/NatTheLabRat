@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
@@ -16,23 +17,24 @@ public class Manager : MonoBehaviour
     public GameObject Success;
     public bool PlayerPressed;
     public GameObject Fade;
+    public int Seconds;
+    public int Minutes;
 
     [CanBeNull] public GameObject Mirror;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Fade = GameObject.Find("FadeOverlay");
     }
 
-    public void FadeIn()
-    {
+    public void FadeIn() {
         Fade.SetActive(true);
         Fade.GetComponent<FadeScript>().StartCoroutine(nameof(FadeScript.FadeIn));
     }
 
-    public void GameStart()
-    {
+    public void GameStart() {
+        Seconds = 0;
+        Minutes = 0;
         Mouse = GameObject.Find("Mouse");
         MouseScript = Mouse.GetComponent<MouseScript>();
 
@@ -56,6 +58,8 @@ public class Manager : MonoBehaviour
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
+
+        StartCoroutine(Timer());
     }
 
     // This is called when the player presses the reset button and resets the level
@@ -78,21 +82,18 @@ public class Manager : MonoBehaviour
         }
     }
     
-    public void PlayerPress()
-    {
+    public void PlayerPress() {
         PlayerPressed = true;
     }
     
-    public void Play()
-    {
+    public void Play() {
         PlayerPressed = false;
         GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = SceneManager.GetActiveScene().buildIndex + 1;
         FadeIn();
         //Fade.SetActive(false);
     }
     
-    public void StartGame()
-    {
+    public void StartGame() {
         if (GameStarted == false) {
            Gates.GetComponent<GateOpen>().GateOpened = true;
            Mouse.GetComponent<MouseScript>().MoveY = -4;
@@ -105,43 +106,67 @@ public class Manager : MonoBehaviour
     }
 
     //This is called when the player presses the pause button
-    public void PauseMenu()
-    {
+    public void PauseMenu() {
         Paused.SetActive(!Paused.activeSelf);
-        if (Paused.activeSelf)
-        {
+        MouseScript.MovePermission = !MouseScript.MovePermission;
+        if (Paused.activeSelf) {
+            StopCoroutine(Timer());
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().VolumeButton = GameObject.Find("MusicLevel");
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolumeSprite();
             GameObject.Find("MenuSound").GetComponent<MenuVolume>().MenuVolumeButton = GameObject.Find("MenuLevel");
             GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolumeSprite();
         }
+        else {
+            StartCoroutine(Timer());
+        }
     }
 
-    public void LevelMenu()
-    {
+    public void LevelMenu() {
         GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 14; //REMINDER: CHANGE THIS TO 21 ONCE DONE
         FadeIn();
     }
 
-    public void VolumeChange()
-    {
+    public void VolumeChange() {
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().SetVolume();
     }
     
-    public void MenuVolumeChange()
-    {
+    public void MenuVolumeChange() {
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().SetVolume();
     }
 
-    public void PlayButtonSound()
-    {
+    public void PlayButtonSound() {
         GameObject.Find("MenuSound").GetComponent<AudioSource>().Play();
     }
     
-    public void LevelComplete()
-    {
+    public void LevelComplete() {
+        //StopCoroutine(Timer());
         Success.SetActive(true);
         GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = false;
         GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().LogLevel();
+        if(Seconds < 10) {
+            GameObject.Find("Seconds").GetComponent<TextMeshProUGUI>().text = "0" + Seconds.ToString();
+        }
+        else {
+            GameObject.Find("Seconds").GetComponent<TextMeshProUGUI>().text = Seconds.ToString();
+        }
+        if(Minutes < 10) {
+            GameObject.Find("Minutes").GetComponent<TextMeshProUGUI>().text = "0" + Minutes.ToString();
+        }
+        else {
+            GameObject.Find("Minutes").GetComponent<TextMeshProUGUI>().text = Minutes.ToString();
+        }
+    }
+    
+    public IEnumerator Timer() {
+        while (Mouse.activeSelf == true)
+        {
+            yield return new WaitForSecondsRealtime(1);
+            Seconds++;
+            if (Seconds == 60)
+            {
+                Minutes++;
+                Seconds = 0;
+            }
+        }
     }
 }

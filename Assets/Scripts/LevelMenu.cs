@@ -54,8 +54,12 @@ public class LevelMenu : MonoBehaviour
             text.GetComponent<TextMeshProUGUI>().fontSize = 60;
             text.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("NiceSugarFont");
             button.GetComponent<Transform>().SetAsFirstSibling();
-            
-            
+
+            if (!GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().CompletedList
+                .Contains(i))
+            {
+                button.GetComponent<Button>().interactable = false;
+            }
         }
     }
 
