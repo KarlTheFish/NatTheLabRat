@@ -15,6 +15,7 @@ public class Manager : MonoBehaviour
     public bool GameStarted;
     public GameObject Paused;
     public GameObject Success;
+    public GameObject SuccessWindow;
     public bool PlayerPressed;
     public GameObject Fade;
     public int Seconds;
@@ -52,6 +53,7 @@ public class Manager : MonoBehaviour
         Paused.SetActive(false);
 
         Success = GameObject.Find("Success");
+        SuccessWindow = GameObject.Find("SuccessWindow");
         Success.SetActive(false);
         
                 
@@ -108,16 +110,19 @@ public class Manager : MonoBehaviour
     //This is called when the player presses the pause button
     public void PauseMenu() {
         Paused.SetActive(!Paused.activeSelf);
-        MouseScript.MovePermission = !MouseScript.MovePermission;
         if (Paused.activeSelf) {
             StopCoroutine(Timer());
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().VolumeButton = GameObject.Find("MusicLevel");
             GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolumeSprite();
             GameObject.Find("MenuSound").GetComponent<MenuVolume>().MenuVolumeButton = GameObject.Find("MenuLevel");
             GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolumeSprite();
+            MouseScript.MovePermission = false;
         }
         else {
             StartCoroutine(Timer());
+            if(GameStarted) {
+                MouseScript.MovePermission = true;
+            }
         }
     }
 
@@ -142,6 +147,7 @@ public class Manager : MonoBehaviour
         //StopCoroutine(Timer());
         Success.SetActive(true);
         GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission = false;
+        StartCoroutine(SuccessWindowMove());
         GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().LogLevel();
         if(Seconds < 10) {
             GameObject.Find("Seconds").GetComponent<TextMeshProUGUI>().text = "0" + Seconds.ToString();
@@ -167,6 +173,13 @@ public class Manager : MonoBehaviour
                 Minutes++;
                 Seconds = 0;
             }
+        }
+    }
+
+    public IEnumerator SuccessWindowMove() {
+        while (SuccessWindow.GetComponent<RectTransform>().anchoredPosition != Vector2.zero) {
+            SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 1000 * Time.deltaTime);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }
