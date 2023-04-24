@@ -179,7 +179,7 @@ public class Manager : MonoBehaviour
     public IEnumerator SuccessWindowMove() {
         while (SuccessWindow.GetComponent<RectTransform>().anchoredPosition != Vector2.zero) {
             SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 1000 * Time.deltaTime);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSecondsRealtime(0.02f);
         }
     }
 }

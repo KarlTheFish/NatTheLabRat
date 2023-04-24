@@ -55,8 +55,27 @@ public class LevelMenu : MonoBehaviour
             text.GetComponent<TextMeshProUGUI>().font = Resources.Load<TMP_FontAsset>("NiceSugarFont");
             button.GetComponent<Transform>().SetAsFirstSibling();
 
+            button.AddComponent<AudioSource>();
+            button.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("ButtonClick");
+            button.GetComponent<AudioSource>().playOnAwake = false;
+            switch (GameObject.Find("MenuSound").GetComponent<MenuVolume>().MenuVolumeState)
+            {
+                case 1:
+                    button.GetComponent<AudioSource>().volume = 0;
+                    break;
+                case 2:
+                    button.GetComponent<AudioSource>().volume = 0.5f;
+                    break;
+                case 3:
+                    button.GetComponent<AudioSource>().volume = 1;
+                    break;
+            }
+            
+            button.GetComponent<Button>().onClick.AddListener(button.GetComponent<AudioSource>().Play);
+
+
             if (!GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().CompletedList
-                .Contains(i))
+                    .Contains(i))
             {
                 button.GetComponent<Button>().interactable = false;
             }

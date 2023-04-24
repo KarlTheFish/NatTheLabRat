@@ -14,6 +14,5 @@ public class LevelsCompleted : MonoBehaviour
 
     public void LogLevel() {
         CompletedList.Add(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log(CompletedList.Count);
     }
 }

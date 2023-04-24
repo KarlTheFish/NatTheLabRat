@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class MenuVolume : MonoBehaviour
 {
-    public static int MenuVolumeState;
+    public int MenuVolumeState;
     [CanBeNull] public GameObject MenuVolumeButton;
     
     
