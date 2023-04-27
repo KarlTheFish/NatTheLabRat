@@ -77,7 +77,8 @@ public class LevelMenu : MonoBehaviour
             if (!GameObject.Find("MenuSound").GetComponent<LevelsCompleted>().CompletedList
                     .Contains(i))
             {
-                button.GetComponent<Button>().interactable = false;
+                //button.GetComponent<Button>().interactable = false;
+                //REMINDER: Uncomment later
             }
         }
     }

@@ -107,7 +107,7 @@ public class DoorChange : MonoBehaviour
     {
         clicked = true;
     }
-    
+
     //This coroutine is to rotate the door to the correct position
     IEnumerator DoorRotate()
     {

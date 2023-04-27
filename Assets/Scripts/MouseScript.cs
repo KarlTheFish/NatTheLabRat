@@ -21,6 +21,7 @@ public class MouseScript : MonoBehaviour
     public SpriteRenderer Sprite1;
     private GameObject GameManager;
     private Manager Manager;
+    private float ColliderOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class MouseScript : MonoBehaviour
         Sprite1 = gameObject.GetComponent<SpriteRenderer>();
         GameManager = GameObject.Find("GameManager");
         Manager = GameManager.GetComponent<Manager>();
+        ColliderOffset = gameObject.GetComponent<CircleCollider2D>().offset.y;
     }
 
     // Update is called once per frame
@@ -74,6 +76,8 @@ public class MouseScript : MonoBehaviour
         {
             if (boxCollider2D.GameObject().name == "Mirror")
             {
+                ColliderOffset = -ColliderOffset;
+                gameObject.GetComponent<CircleCollider2D>().offset = new Vector2(0, ColliderOffset);
                 MoveX = -MoveX;
                 MoveY = -MoveY;
                 Sprite1.flipY = !(Sprite1.flipY);
@@ -85,6 +89,7 @@ public class MouseScript : MonoBehaviour
                 switch ((MoveX, MoveY))
                 {
                     case (0, -4):
+                        transform.position = new Vector3();
                         MoveX = 4;
                         MoveY = 0;
                         break;
