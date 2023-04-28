@@ -89,7 +89,7 @@ public class MouseScript : MonoBehaviour
                 switch ((MoveX, MoveY))
                 {
                     case (0, -4):
-                        transform.position = new Vector3();
+                        //transform.position = new Vector3();
                         MoveX = 4;
                         MoveY = 0;
                         break;

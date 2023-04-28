@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -71,6 +72,7 @@ public class DoorChange : MonoBehaviour
             }
 
             StartCoroutine(DoorRotate());
+            clicked = false;
         }
         else
         {
@@ -88,13 +90,14 @@ public class DoorChange : MonoBehaviour
             GhostNr = Ghosts.Count;
             GhostReverse = true;
         }
-
-        if (GhostNr < 1)
+        else
         {
-            GhostNr = 1;
-            GhostReverse = false;
+            if (GhostNr < 1)
+            {
+                GhostNr = 1;
+                GhostReverse = false;
+            }
         }
-
 
         if (inPosition == true)
         {
@@ -117,25 +120,33 @@ public class DoorChange : MonoBehaviour
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
                 Pivotpoint.transform.Rotate(Vector3.back, Space.Self);
-                yield return new WaitForSecondsRealtime(0.1f);
-                break;
+                yield return new WaitForSecondsRealtime(0.05f);
+                //break;
             }
             if (gameObject.transform.rotation.eulerAngles.z < ghost.transform.rotation.eulerAngles.z)
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, 1);
                 Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
-                yield return new WaitForSecondsRealtime(0.1f);
+                yield return new WaitForSecondsRealtime(0.05f);
+                //break;
+            }
+            if (gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z < 1 &&
+                gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z > -1)
+            {
+                Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
+                gameObject.transform.rotation = ghost.transform.rotation;
                 break;
             }
         }
-        
+        Debug.Log(ghost);
         //This if statement is to make sure the door is in the correct position
-        if (gameObject.transform.rotation == ghost.transform.rotation)
+        if (Vector2.Distance(gameObject.transform.position, ghost.transform.position) < 1)
         {
+            Debug.Log("Distance");
             GhostDoorRotate();
             OGrotation = gameObject.transform.rotation;
             OGposition = gameObject.transform.position;
-            clicked = false;
+            //clicked = false;
             if (GhostReverse == false)
             {
                 GhostNr = GhostNr + 1;
