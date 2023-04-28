@@ -20,6 +20,8 @@ public class Manager : MonoBehaviour
     public GameObject Fade;
     public int Seconds;
     public int Minutes;
+    
+    private List<GameObject> Doors = new List<GameObject>(); //MOVED: This came from DoorChange script
 
     [CanBeNull] public GameObject Mirror;
 
@@ -56,6 +58,12 @@ public class Manager : MonoBehaviour
         SuccessWindow = GameObject.Find("SuccessWindow");
         Success.SetActive(false);
         
+        //MOVED: This came from DoorChange script
+        foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
+        {
+            Doors.Add(door);
+        }
+        
                 
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
@@ -81,6 +89,10 @@ public class Manager : MonoBehaviour
         }
         if(Success.activeSelf == true) {
             Success.SetActive(false);
+        }
+        foreach (GameObject door in Doors)
+        {
+            door.GetComponent<DoorChange>().Reset();
         }
     }
     

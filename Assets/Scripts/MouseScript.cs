@@ -106,22 +106,26 @@ public class MouseScript : MonoBehaviour
                             break;
                     }
                 }
-                else { //REMINDER: Add mouse bounceback after hitting a wall
+                else {
                     transform.Rotate(new Vector3(0, 0, 90), Space.Self);
                     switch ((MoveX, MoveY)) {
                         case (0, -4):
+                            transform.position += new Vector3(0, 0.05f, 0);
                             MoveX = 4;
                             MoveY = 0;
                             break;
                         case (4, 0):
+                            transform.position -= new Vector3(0.05f, 0, 0);
                             MoveX = 0;
                             MoveY = 4;
                             break;
                         case (0, 4):
+                            transform.position -= new Vector3(0, 0.05f, 0);
                             MoveX = -4;
                             MoveY = 0;
                             break;
                         case (-4, 0):
+                            transform.position += new Vector3(0.05f, 0, 0);
                             MoveX = 0;
                             MoveY = -4;
                             break;

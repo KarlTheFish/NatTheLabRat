@@ -13,7 +13,8 @@ public class DoorChange : MonoBehaviour
          public Vector2 position;
          public Quaternion rotation;
     }
-    
+
+    private int j;
     public GameObject ghost;
     private bool clicked;
     private Quaternion OGrotation;
@@ -23,9 +24,12 @@ public class DoorChange : MonoBehaviour
     private List<GameObject> Ghosts = new List<GameObject>();
     public int GhostNr;
     private bool GhostReverse;
-    private List<GameObject> Doors = new List<GameObject>();
-    
+
+    public List<DoorPositionStart> ghostPositionStarts = new List<DoorPositionStart>();
+
     public DoorPositionStart doorPositionStart;
+    public DoorPositionStart pivotpointPositionStart;
+    public DoorPositionStart StartPosGhost;
 
     //TODO: Add sound effect when door has finished moving
     //TODO: is the doors list really necessary? Try removing it and see if it still works 
@@ -44,21 +48,38 @@ public class DoorChange : MonoBehaviour
         doorPositionStart.position = gameObject.transform.position;
         doorPositionStart.rotation = gameObject.transform.rotation;
         
-        foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
-        {
-            Doors.Add(door);
-        }
+        pivotpointPositionStart.position = Pivotpoint.transform.position;
+        pivotpointPositionStart.rotation = Pivotpoint.transform.rotation;
 
         for (int i = 1; i < 4; i++)
         {
-            if (GameObject.Find("Ghost" + i + gameObject.name) != null)
-            {
+            if (GameObject.Find("Ghost" + i + gameObject.name) != null) {
                 Ghosts.Add(GameObject.Find("Ghost" + i + gameObject.name));
+                ghostPositionStarts.Add(new DoorPositionStart());
+                //StartPosGhost = ghostPositionStarts[i - 1];
+                StartPosGhost.position = Ghosts[i - 1].transform.position;
+                StartPosGhost.rotation = Ghosts[i - 1].transform.rotation;
+                ghostPositionStarts[i-1] = StartPosGhost;
+                //Debug.Log(StartPosGhost.position);
             }
-            else
-            {
+            else {
                 break;
             }
+        }
+    }
+
+    public void Reset()
+    {
+        j = 0;
+        gameObject.transform.position = doorPositionStart.position;
+        gameObject.transform.rotation = doorPositionStart.rotation;
+        Pivotpoint.transform.position = pivotpointPositionStart.position;
+        Pivotpoint.transform.rotation = pivotpointPositionStart.rotation;
+        foreach(GameObject ghost1 in Ghosts){
+            StartPosGhost = ghostPositionStarts[j];
+            ghost1.transform.position = StartPosGhost.position;
+            ghost1.transform.rotation = StartPosGhost.rotation;
+            j++;
         }
     }
 
@@ -68,9 +89,9 @@ public class DoorChange : MonoBehaviour
         ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
         if (clicked == true && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false)
         {
-            foreach (GameObject door in Doors)
-            {
-                if (Vector2.Distance(door.transform.position, ghost.transform.position) < 0.01 && door.name != gameObject.name)
+            //foreach (GameObject door in Doors)
+            //{
+                if (Vector2.Distance(gameObject.transform.position, ghost.transform.position) < 0.01 /*&& door.name != gameObject.name*/)
                 {
                     if (GhostReverse)
                     {
@@ -82,7 +103,7 @@ public class DoorChange : MonoBehaviour
                         GhostNr = GhostNr - 1;
                     }
                 }
-            }
+            //}
 
             StartCoroutine(DoorRotate());
             clicked = false;
