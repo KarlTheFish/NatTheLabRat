@@ -35,7 +35,7 @@ public class MirrorScript : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isColliding == false)
+        if (isColliding == false && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false)
         {
             transform.position = transform.position + (Vector3)mouseMovement;
         }

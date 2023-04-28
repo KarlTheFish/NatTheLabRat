@@ -8,7 +8,12 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class DoorChange : MonoBehaviour
-{
+{    
+    public struct DoorPositionStart {
+         public Vector2 position;
+         public Quaternion rotation;
+    }
+    
     public GameObject ghost;
     private bool clicked;
     private Quaternion OGrotation;
@@ -20,7 +25,11 @@ public class DoorChange : MonoBehaviour
     private bool GhostReverse;
     private List<GameObject> Doors = new List<GameObject>();
     
+    public DoorPositionStart doorPositionStart;
+
     //TODO: Add sound effect when door has finished moving
+    //TODO: is the doors list really necessary? Try removing it and see if it still works 
+    //TODO: It seems that it would be much better to put the list of doors into manager script and use that for resetting the doors
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +40,10 @@ public class DoorChange : MonoBehaviour
         Pivotpoint = GameObject.Find(gameObject.name + "Pivotpoint");
         GhostNr = 1;
         GhostReverse = false;
+        
+        doorPositionStart.position = gameObject.transform.position;
+        doorPositionStart.rotation = gameObject.transform.rotation;
+        
         foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
         {
             Doors.Add(door);
@@ -120,14 +133,14 @@ public class DoorChange : MonoBehaviour
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
                 Pivotpoint.transform.Rotate(Vector3.back, Space.Self);
-                yield return new WaitForSecondsRealtime(0.05f);
+                yield return new WaitForSecondsRealtime(0.02f);
                 //break;
             }
             if (gameObject.transform.rotation.eulerAngles.z < ghost.transform.rotation.eulerAngles.z)
             {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, 1);
                 Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
-                yield return new WaitForSecondsRealtime(0.05f);
+                yield return new WaitForSecondsRealtime(0.02f);
                 //break;
             }
             if (gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z < 1 &&

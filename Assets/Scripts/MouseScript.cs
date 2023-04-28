@@ -67,15 +67,12 @@ public class MouseScript : MonoBehaviour
 
     else
     {
-        if (boxCollider2D.GameObject().CompareTag("Reset"))
-        {
+        if (boxCollider2D.GameObject().CompareTag("Reset")) {
             Manager.Reset();
         } 
 
-        else
-        {
-            if (boxCollider2D.GameObject().name == "Mirror")
-            {
+        else {
+            if (boxCollider2D.GameObject().name == "Mirror") {
                 ColliderOffset = -ColliderOffset;
                 gameObject.GetComponent<CircleCollider2D>().offset = new Vector2(0, ColliderOffset);
                 MoveX = -MoveX;
@@ -83,28 +80,52 @@ public class MouseScript : MonoBehaviour
                 Sprite1.flipY = !(Sprite1.flipY);
             }
 
-            else
-            {
-                transform.Rotate(new Vector3(0, 0, 90), Space.Self);
-                switch ((MoveX, MoveY))
-                {
-                    case (0, -4):
-                        //transform.position = new Vector3();
-                        MoveX = 4;
-                        MoveY = 0;
-                        break;
-                    case (4, 0):
-                        MoveX = 0;
-                        MoveY = 4;
-                        break;
-                    case (0, 4):
-                        MoveX = -4;
-                        MoveY = 0;
-                        break;
-                    case (-4, 0):
-                        MoveX = 0;
-                        MoveY = -4;
-                        break;
+            else {
+                if (boxCollider2D.GameObject().CompareTag("Door")) {
+                    transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+                    switch ((MoveX, MoveY)) {
+                        case (0, -4):
+                            transform.position += new Vector3(0, 0.26f, 0);
+                            MoveX = 4;
+                            MoveY = 0;
+                            break;
+                        case (4, 0):
+                            transform.position -= new Vector3(0.26f, 0, 0);
+                            MoveX = 0;
+                            MoveY = 4;
+                            break;
+                        case (0, 4):
+                            transform.position -= new Vector3(0, 0.26f, 0);
+                            MoveX = -4;
+                            MoveY = 0;
+                            break;
+                        case (-4, 0):
+                            transform.position += new Vector3(0.26f, 0, 0);
+                            MoveX = 0;
+                            MoveY = -4;
+                            break;
+                    }
+                }
+                else { //REMINDER: Add mouse bounceback after hitting a wall
+                    transform.Rotate(new Vector3(0, 0, 90), Space.Self);
+                    switch ((MoveX, MoveY)) {
+                        case (0, -4):
+                            MoveX = 4;
+                            MoveY = 0;
+                            break;
+                        case (4, 0):
+                            MoveX = 0;
+                            MoveY = 4;
+                            break;
+                        case (0, 4):
+                            MoveX = -4;
+                            MoveY = 0;
+                            break;
+                        case (-4, 0):
+                            MoveX = 0;
+                            MoveY = -4;
+                            break;
+                    }
                 }
             }
         }
