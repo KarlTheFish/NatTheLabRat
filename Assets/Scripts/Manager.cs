@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
@@ -20,10 +21,16 @@ public class Manager : MonoBehaviour
     public GameObject Fade;
     public int Seconds;
     public int Minutes;
+    private bool colorBool;
+    private bool fadeComplete = false; // This checks if UI helper fadeout is complete
+
+    [CanBeNull] private Color highlightColor;
     
-    private List<GameObject> Doors = new List<GameObject>(); //MOVED: This came from DoorChange script
+    private List<GameObject> Doors = new List<GameObject>();
+    private List<GameObject> Highlights = new List<GameObject>();
 
     [CanBeNull] public GameObject Mirror;
+    [CanBeNull] public GameObject guideText;
 
     // Start is called before the first frame update
     void Start() {
@@ -47,8 +54,10 @@ public class Manager : MonoBehaviour
         
         // This is a bit of a hacky way to get the Mirror object, but it works
         if(GameObject.FindWithTag("Mirror") != null) {
-            Mirror = GameObject.FindWithTag("Mirror");
+            Mirror = GameObject.FindWithTag("Mirror"); //REMINDER: This only finds one object, modify to make it find all of them
         }
+        
+        
         
         // Find the Paused and Success objects and set them to inactive
         Paused = GameObject.Find("Paused");
@@ -58,13 +67,20 @@ public class Manager : MonoBehaviour
         SuccessWindow = GameObject.Find("SuccessWindow");
         Success.SetActive(false);
         
-        //MOVED: This came from DoorChange script
-        foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door"))
-        {
+        foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door")) {
             Doors.Add(door);
         }
+        foreach (GameObject highlight in GameObject.FindGameObjectsWithTag("Highlight")) {
+            Highlights.Add(highlight);
+        }
         
-                
+        if(GameObject.Find("GuideText") != null) {
+            highlightColor = Color.white;
+            highlightColor.a = 0;
+            guideText = GameObject.Find("GuideText");
+            guideText.transform.SetAsFirstSibling();
+            StartCoroutine(HighlightColor());
+        }
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
         GameObject.Find("MenuSound").GetComponent<MenuVolume>().CheckMenuVolume();
@@ -104,14 +120,15 @@ public class Manager : MonoBehaviour
         PlayerPressed = false;
         GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = SceneManager.GetActiveScene().buildIndex + 1;
         FadeIn();
-        //Fade.SetActive(false);
     }
     
     public void StartGame() {
-        if (GameStarted == false) {
-           Gates.GetComponent<GateOpen>().GateOpened = true;
-           Mouse.GetComponent<MouseScript>().MoveY = -4;
-           GameStarted = true;
+        if (GameStarted == false) { 
+            StartCoroutine(GuideFadeOut()); //TODO: Make it so this also starts when door is rotated
+            Gates.GetComponent<GateOpen>().GateOpened = true; 
+            Mouse.GetComponent<MouseScript>().MoveY = -4; 
+            StopCoroutine(HighlightColor()); 
+            GameStarted = true;
         }
         else {
             Debug.Log("You can't start it again, you silly silly silly silly silly silly silly goose!");
@@ -193,5 +210,45 @@ public class Manager : MonoBehaviour
             SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 1000 * Time.deltaTime);
             yield return new WaitForSecondsRealtime(0.02f);
         }
+    }
+
+    public IEnumerator HighlightColor() {
+        Debug.Log("Highlight coroutine started");
+        while (GameStarted == false) {
+            while (colorBool == false) {
+                highlightColor.a += 0.05f;
+                foreach(GameObject h in Highlights) {
+                    h.GetComponent<Image>().color = highlightColor;
+                }
+                if(highlightColor.a >= 1) {
+                    colorBool = true;
+                    break;
+                }
+                yield return new WaitForSecondsRealtime(0.05f);
+            }
+            while (colorBool == true) {
+                highlightColor.a -= 0.05f;
+                foreach(GameObject h in Highlights) {
+                    h.GetComponent<Image>().color = highlightColor;
+                }
+                if (highlightColor.a <= 0) {
+                    colorBool = false;
+                    break;
+                }
+                yield return new WaitForSecondsRealtime(0.05f);
+            }
+        }
+    }
+
+    IEnumerator GuideFadeOut() {
+        while (fadeComplete == false) {
+            guideText.GetComponent<CanvasGroup>().alpha -= 0.05f;
+            yield return new WaitForSecondsRealtime(0.02f);
+            if (guideText.GetComponent<CanvasGroup>().alpha <= 0) {
+                fadeComplete = true;
+                break;
+            }
+        }
+        StopCoroutine(GuideFadeOut());
     }
 }

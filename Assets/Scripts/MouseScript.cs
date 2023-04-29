@@ -56,7 +56,7 @@ public class MouseScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D boxCollider2D)
     {
-    Debug.Log(boxCollider2D.GameObject().name);
+    Debug.Log(boxCollider2D.GameObject().name + " hit");
 
     if (boxCollider2D.GameObject().name == "Cheese")
     {
@@ -85,22 +85,22 @@ public class MouseScript : MonoBehaviour
                     transform.Rotate(new Vector3(0, 0, 90), Space.Self);
                     switch ((MoveX, MoveY)) {
                         case (0, -4):
-                            transform.position += new Vector3(0, 0.26f, 0);
+                            transform.position += new Vector3(0, 0.1f, 0);
                             MoveX = 4;
                             MoveY = 0;
                             break;
                         case (4, 0):
-                            transform.position -= new Vector3(0.26f, 0, 0);
+                            transform.position -= new Vector3(0.1f, 0, 0);
                             MoveX = 0;
                             MoveY = 4;
                             break;
                         case (0, 4):
-                            transform.position -= new Vector3(0, 0.26f, 0);
+                            transform.position -= new Vector3(0, 0.1f, 0);
                             MoveX = -4;
                             MoveY = 0;
                             break;
                         case (-4, 0):
-                            transform.position += new Vector3(0.26f, 0, 0);
+                            transform.position += new Vector3(0.1f, 0, 0);
                             MoveX = 0;
                             MoveY = -4;
                             break;
