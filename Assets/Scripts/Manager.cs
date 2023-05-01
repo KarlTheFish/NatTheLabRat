@@ -75,11 +75,10 @@ public class Manager : MonoBehaviour
         }
         
         if(GameObject.Find("GuideText") != null) {
-            highlightColor = Color.white;
-            highlightColor.a = 0;
+            //shighlightColor = Color.white;
+            //highlightColor.a = 0;
             guideText = GameObject.Find("GuideText");
             guideText.transform.SetAsFirstSibling();
-            StartCoroutine(HighlightColor());
         }
         // Volume stuff
         GameObject.Find("AudioPlayer").GetComponent<MusicVolume>().CheckVolume();
@@ -126,8 +125,7 @@ public class Manager : MonoBehaviour
         if (GameStarted == false) { 
             StartCoroutine(GuideFadeOut()); //TODO: Make it so this also starts when door is rotated
             Gates.GetComponent<GateOpen>().GateOpened = true; 
-            Mouse.GetComponent<MouseScript>().MoveY = -4; 
-            StopCoroutine(HighlightColor()); 
+            Mouse.GetComponent<MouseScript>().MoveY = -4;
             GameStarted = true;
         }
         else {
@@ -207,36 +205,8 @@ public class Manager : MonoBehaviour
 
     public IEnumerator SuccessWindowMove() {
         while (SuccessWindow.GetComponent<RectTransform>().anchoredPosition != Vector2.zero) {
-            SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 1000 * Time.deltaTime);
-            yield return new WaitForSecondsRealtime(0.02f);
-        }
-    }
-
-    public IEnumerator HighlightColor() {
-        Debug.Log("Highlight coroutine started");
-        while (GameStarted == false) {
-            while (colorBool == false) {
-                highlightColor.a += 0.05f;
-                foreach(GameObject h in Highlights) {
-                    h.GetComponent<Image>().color = highlightColor;
-                }
-                if(highlightColor.a >= 1) {
-                    colorBool = true;
-                    break;
-                }
-                yield return new WaitForSecondsRealtime(0.05f);
-            }
-            while (colorBool == true) {
-                highlightColor.a -= 0.05f;
-                foreach(GameObject h in Highlights) {
-                    h.GetComponent<Image>().color = highlightColor;
-                }
-                if (highlightColor.a <= 0) {
-                    colorBool = false;
-                    break;
-                }
-                yield return new WaitForSecondsRealtime(0.05f);
-            }
+            SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 5000 * Time.deltaTime);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
     }
 
