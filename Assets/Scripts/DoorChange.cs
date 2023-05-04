@@ -16,7 +16,7 @@ public class DoorChange : MonoBehaviour
 
     private int j;
     public GameObject ghost;
-    private bool clicked;
+    public bool clicked;
     private Quaternion OGrotation;
     private Vector2 OGposition;
     private bool inPosition;
@@ -143,7 +143,8 @@ public class DoorChange : MonoBehaviour
             }
             if (gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z < 1 &&
                 gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z > -1) {
-                Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
+                Debug.Log("Rotated");
+                Pivotpoint.transform.rotation 
                 gameObject.transform.rotation = ghost.transform.rotation;
                 break;
             }

@@ -154,7 +154,7 @@ public class Manager : MonoBehaviour
     }
 
     public void LevelMenu() {
-        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 14; //REMINDER: CHANGE THIS TO 21 ONCE DONE
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 15; //REMINDER: CHANGE THIS TO 21 ONCE DONE
         FadeIn();
     }
 
@@ -205,7 +205,7 @@ public class Manager : MonoBehaviour
 
     public IEnumerator SuccessWindowMove() {
         while (SuccessWindow.GetComponent<RectTransform>().anchoredPosition != Vector2.zero) {
-            SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 5000 * Time.deltaTime);
+            SuccessWindow.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(SuccessWindow.GetComponent<RectTransform>().anchoredPosition, Vector2.zero, 3000 * Time.deltaTime);
             yield return new WaitForSecondsRealtime(0.01f);
         }
     }

@@ -276,9 +276,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Outside
       objectReference: {fileID: 0}
+    - target: {fileID: 1036644428726622781, guid: cfbfa4845f49d5e95a2e83dbe9bb7fd4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6739259421361857411, guid: cfbfa4845f49d5e95a2e83dbe9bb7fd4, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8776990660236011686, guid: cfbfa4845f49d5e95a2e83dbe9bb7fd4, type: 3}
       propertyPath: m_RootOrder
@@ -768,6 +772,10 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
       value: Wall (1)
@@ -852,6 +860,10 @@ PrefabInstance:
     - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Size.x
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
@@ -1360,6 +1372,10 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
       value: Wall (3)
@@ -1791,6 +1807,10 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8396321557255421171, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8396321557255421175, guid: ac56a11af478322c4bd4260170f62db2, type: 3}
       propertyPath: m_Name
       value: Wall (10)
@@ -1809,6 +1829,7 @@ GameObject:
   - component: {fileID: 1841027770}
   - component: {fileID: 1841027769}
   - component: {fileID: 1841027771}
+  - component: {fileID: 1841027773}
   m_Layer: 0
   m_Name: DoorHighlight
   m_TagString: Untagged
@@ -1908,6 +1929,32 @@ RectTransform:
   m_AnchoredPosition: {x: 5.0001, y: 0.04}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &1841027773
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841027768}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!4 &1879512276 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5113940012108553039, guid: e8ffb4ae574b127c2b9e4fc977f06967, type: 3}
@@ -1926,7 +1973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6739259421361857411, guid: cfbfa4845f49d5e95a2e83dbe9bb7fd4, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8776990660236011686, guid: cfbfa4845f49d5e95a2e83dbe9bb7fd4, type: 3}
       propertyPath: m_RootOrder
