@@ -133,18 +133,17 @@ public class DoorChange : MonoBehaviour
         while (gameObject.transform.rotation != ghost.transform.rotation) {
             if (gameObject.transform.rotation.eulerAngles.z > ghost.transform.rotation.eulerAngles.z) {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
-                Pivotpoint.transform.Rotate(Vector3.back, Space.Self);
+                Pivotpoint.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
                 yield return new WaitForSecondsRealtime(0.02f);
             }
             if (gameObject.transform.rotation.eulerAngles.z < ghost.transform.rotation.eulerAngles.z) {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, 1);
-                Pivotpoint.transform.Rotate(Vector3.forward, Space.Self);
+                Pivotpoint.transform.RotateAround(Pivotpoint.transform.position, Vector3.forward, 1);
                 yield return new WaitForSecondsRealtime(0.02f);
             }
             if (gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z < 1 &&
                 gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z > -1) {
                 Debug.Log("Rotated");
-                Pivotpoint.transform.rotation 
                 gameObject.transform.rotation = ghost.transform.rotation;
                 break;
             }
