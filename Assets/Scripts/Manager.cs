@@ -43,6 +43,7 @@ public class Manager : MonoBehaviour
     }
 
     public void GameStart() {
+        Debug.Log("gamestart");
         Seconds = 0;
         Minutes = 0;
         Mouse = GameObject.Find("Mouse");
@@ -57,8 +58,6 @@ public class Manager : MonoBehaviour
             Mirror = GameObject.FindWithTag("Mirror"); //REMINDER: This only finds one object, modify to make it find all of them
         }
         
-        
-        
         // Find the Paused and Success objects and set them to inactive
         Paused = GameObject.Find("Paused");
         Paused.SetActive(false);
@@ -66,7 +65,7 @@ public class Manager : MonoBehaviour
         Success = GameObject.Find("Success");
         SuccessWindow = GameObject.Find("SuccessWindow");
         Success.SetActive(false);
-        
+
         foreach (GameObject door in GameObject.FindGameObjectsWithTag("Door")) {
             Doors.Add(door);
         }
@@ -75,8 +74,6 @@ public class Manager : MonoBehaviour
         }
         
         if(GameObject.Find("GuideText") != null) {
-            //shighlightColor = Color.white;
-            //highlightColor.a = 0;
             guideText = GameObject.Find("GuideText");
             guideText.transform.SetAsFirstSibling();
         }
@@ -211,7 +208,7 @@ public class Manager : MonoBehaviour
     }
 
     IEnumerator GuideFadeOut() {
-        while (fadeComplete == false) {
+        while (fadeComplete == false && guideText != null) {
             guideText.GetComponent<CanvasGroup>().alpha -= 0.05f;
             yield return new WaitForSecondsRealtime(0.02f);
             if (guideText.GetComponent<CanvasGroup>().alpha <= 0) {
