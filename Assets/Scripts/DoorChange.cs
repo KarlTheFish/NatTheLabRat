@@ -14,6 +14,7 @@ public class DoorChange : MonoBehaviour
          public Quaternion rotation;
     }
 
+    public bool moving = false;
     private int j;
     public GameObject ghost;
     public bool clicked;
@@ -32,9 +33,8 @@ public class DoorChange : MonoBehaviour
     public DoorPositionStart StartPosGhost;
 
     //TODO: Add sound effect when door has finished moving
-    //TODO: is the doors list really necessary? Try removing it and see if it still works 
-    //TODO: It seems that it would be much better to put the list of doors into manager script and use that for resetting the doors
-
+    //TODO: Make mouse unable to move when the door is moving
+    
     // Start is called before the first frame update
     void Start() {
         OGrotation = gameObject.transform.rotation;
@@ -133,6 +133,7 @@ public class DoorChange : MonoBehaviour
     //This coroutine is to rotate the door to the correct position
     IEnumerator DoorRotate() {
         while (gameObject.transform.rotation != ghost.transform.rotation) {
+            moving = true;
             if (gameObject.transform.rotation.eulerAngles.z > ghost.transform.rotation.eulerAngles.z) {
                 gameObject.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
                 Pivotpoint.transform.RotateAround(Pivotpoint.transform.position, Vector3.back, 1);
@@ -152,6 +153,7 @@ public class DoorChange : MonoBehaviour
         }
         if (Vector2.Distance(gameObject.transform.position, ghost.transform.position) < 1) {
             GhostDoorRotate();
+            moving = false;
             OGrotation = gameObject.transform.rotation;
             OGposition = gameObject.transform.position;
             if (GhostReverse == false) {

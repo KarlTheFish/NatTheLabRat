@@ -23,6 +23,7 @@ public class Manager : MonoBehaviour
     public int Minutes;
     private bool colorBool;
     private bool fadeComplete = false; // This checks if UI helper fadeout is complete
+    public bool doorMoving;
 
     [CanBeNull] private Color highlightColor;
     
@@ -43,7 +44,6 @@ public class Manager : MonoBehaviour
     }
 
     public void GameStart() {
-        Debug.Log("gamestart");
         Seconds = 0;
         Minutes = 0;
         Mouse = GameObject.Find("Mouse");
@@ -122,13 +122,27 @@ public class Manager : MonoBehaviour
     public void StartGame() {
         if (GameStarted == false) { 
             StartCoroutine(GuideFadeOut()); //TODO: Make it so this also starts when door is rotated
-            Gates.GetComponent<GateOpen>().GateOpened = true; 
-            Mouse.GetComponent<MouseScript>().MoveY = -4;
-            GameStarted = true;
+            StartCoroutine(WaitForDoors());
         }
         else {
             Debug.Log("You can't start it again, you silly silly silly silly silly silly silly goose!");
             // This is a debug message that I put in to make sure that the player can't start the game twice
+        }
+    }
+
+    IEnumerator WaitForDoors() {
+        foreach (GameObject door in Doors) {
+            doorMoving = door.GetComponent<DoorChange>().moving;
+            while (doorMoving == true) {
+                yield return new WaitForSeconds(0.1f);
+                doorMoving = door.GetComponent<DoorChange>().moving;
+            }
+        }
+        if (doorMoving == false) {
+            Gates.GetComponent<GateOpen>().GateOpened = true; 
+            Mouse.GetComponent<MouseScript>().MoveY = -4;
+            GameStarted = true;
+            StopCoroutine(WaitForDoors());
         }
     }
 
@@ -152,7 +166,7 @@ public class Manager : MonoBehaviour
     }
 
     public void LevelMenu() {
-        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 17; //REMINDER: CHANGE THIS TO 21 ONCE DONE
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 18; //REMINDER: CHANGE THIS TO 21 ONCE DONE
         //REMINDER: ANOTHER PLACE TO BE CHANGED IN Script.cs LINE 33
         FadeIn();
     }
