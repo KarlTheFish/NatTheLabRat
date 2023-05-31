@@ -165,6 +165,7 @@ public class DoorChange : MonoBehaviour
     }
 
     private void GhostDoorRotate() {
+        Debug.Log("Ghost door rotate");
         ghost.transform.position = OGposition;
         ghost.transform.rotation = OGrotation;
     }

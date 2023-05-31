@@ -72,7 +72,7 @@ public class MouseScript : MonoBehaviour
         } 
 
         else {
-            if (boxCollider2D.GameObject().name == "Mirror") {
+            if (boxCollider2D.GameObject().CompareTag("Mirror")) {
                 ColliderOffset = -ColliderOffset;
                 gameObject.GetComponent<CircleCollider2D>().offset = new Vector2(0, ColliderOffset);
                 MoveX = -MoveX;
