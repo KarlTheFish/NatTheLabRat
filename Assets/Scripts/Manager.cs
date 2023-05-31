@@ -91,6 +91,7 @@ public class Manager : MonoBehaviour
         Mouse.transform.rotation = Quaternion.Euler(0, 0, 0);
         MouseScript.MovePermission = false;
         Mouse.transform.position = MouseScript.StartPosition;
+        Mouse.GetComponent<CircleCollider2D>().offset = new Vector2(0, -0.2f);
         MouseScript.LeftGate.transform.position = MouseScript.LeftGate.GetComponent<GateOpen>().LeftGateOGpos1;
         MouseScript.RightGate.transform.position = MouseScript.RightGate.GetComponent<GateOpen>().RightGateOGpos1;
         Mouse.GetComponent<Animator>().enabled = false;
