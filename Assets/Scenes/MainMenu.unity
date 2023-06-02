@@ -1924,7 +1924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782090500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51, y: -3.89, z: 0}
+  m_LocalPosition: {x: -1.26, y: -3.89, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2176,6 +2176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e2b28ed1c7b88c88d8655c5cb91bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MenuVolumeState: 0
   MenuVolumeButton: {fileID: 0}
 --- !u!82 &950745359
 AudioSource:

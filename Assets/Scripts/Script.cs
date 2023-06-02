@@ -30,7 +30,7 @@ public class Script : MonoBehaviour
         Fade = GameObject.Find("FadeOverlay");
         Fade.GetComponent<FadeScript>().color = new Color(0, 0, 0, 1);
         Fade.GetComponent<Image>().color = Fade.GetComponent<FadeScript>().color;
-        if (GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal < 20) //REMINDER: SET TO 21 WHEN DONE!!!!!!!!
+        if (GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal < 21) //REMINDER: SET TO 21 WHEN DONE!!!!!!!!
         {
             GameObject.Find("GameManager").GetComponent<Manager>().GameStart();
         }

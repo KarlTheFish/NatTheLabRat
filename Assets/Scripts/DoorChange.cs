@@ -87,7 +87,6 @@ public class DoorChange : MonoBehaviour
     void Update() {
         ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
         if (clicked == true && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false && moving == false) {
-            Debug.Log(moving);
             if (Vector2.Distance(gameObject.transform.position, ghost.transform.position) < 0.01) {
                     if (GhostReverse) {
                         GhostNr = GhostNr + 1;
@@ -151,7 +150,6 @@ public class DoorChange : MonoBehaviour
             }
             if (gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z < 1 &&
                 gameObject.transform.rotation.eulerAngles.z - ghost.transform.rotation.eulerAngles.z > -1) {
-                Debug.Log("Rotated");
                 gameObject.transform.rotation = ghost.transform.rotation;
                 break;
             }
