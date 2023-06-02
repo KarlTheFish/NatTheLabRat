@@ -166,7 +166,7 @@ public class Manager : MonoBehaviour
     }
 
     public void LevelMenu() {
-        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 19; //REMINDER: CHANGE THIS TO 21 ONCE DONE
+        GameObject.Find("AudioPlayer").GetComponent<Script>().LevelIndexGlobal = 20; //REMINDER: CHANGE THIS TO 21 ONCE DONE
         //REMINDER: ANOTHER PLACE TO BE CHANGED IN Script.cs LINE 33
         FadeIn();
     }

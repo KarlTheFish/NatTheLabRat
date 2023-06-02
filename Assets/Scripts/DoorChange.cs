@@ -86,13 +86,13 @@ public class DoorChange : MonoBehaviour
     // Update is called once per frame
     void Update() {
         ghost = GameObject.Find("Ghost" + GhostNr + gameObject.name);
-        if (clicked == true && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false) {
+        if (clicked == true && GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == false && moving == false) {
+            Debug.Log(moving);
             if (Vector2.Distance(gameObject.transform.position, ghost.transform.position) < 0.01) {
                     if (GhostReverse) {
                         GhostNr = GhostNr + 1;
                     }
-
-                    if (GhostReverse == false) {
+                    else if (GhostReverse == false) {
                         GhostNr = GhostNr - 1;
                     }
             }
@@ -104,6 +104,11 @@ public class DoorChange : MonoBehaviour
             if (clicked == true &&
                 GameObject.Find("Mouse").GetComponent<MouseScript>().MovePermission == true) {
                 clicked = false;
+            }
+            else {
+                if (clicked == true && moving == true) {
+                    clicked = false;
+                }
             }
         }
         
